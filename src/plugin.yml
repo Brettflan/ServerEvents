@@ -1,6 +1,3 @@
 name: ServerEvents
 main: org.bukkit.croemmich.serverevents.ServerEvents
 version: 1.0
-description: Log events to a Database, File, or Twitter.
-authors: croemmich
-website: http://forums.bukkit.org

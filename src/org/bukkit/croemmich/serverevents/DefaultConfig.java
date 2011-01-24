@@ -39,7 +39,7 @@ public class DefaultConfig {
 			"	<conf>\r\n" + 
 			"		<!--  Queueing ensures that messages are not displayed too quickly. -->\r\n" + 
 			"		<queue enabled=\"true\" messages_per_minute=\"12\" messages_to_hold=\"10\" />\r\n" + 
-			"		<file enabled=\"false\" uri=\"ServerEvents"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
+			"		<file enabled=\"true\" uri=\"ServerEvents"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
 			"       <!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" +
 			"		<twitter enabled=\"true\" accessToken=\"{accessToken}\" accessTokenSecret=\"{accessTokenSecret}\" rate_limit=\"350\" />\r\n" + 
 			"		<database enabled=\"false\" username=\"\" password=\"\" database=\"jdbc:mysql://localhost:3306/minecraft\" table=\"server_events\" driver=\"com.mysql.jdbc.Driver\" />\r\n" + 
