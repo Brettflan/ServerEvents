@@ -40,13 +40,14 @@ public class DefaultConfig {
 			"		<!--  Queueing ensures that messages are not displayed too quickly. -->\r\n" + 
 			"		<queue enabled=\"true\" messages_per_minute=\"12\" messages_to_hold=\"10\" />\r\n" + 
 			"		<file enabled=\"true\" uri=\"ServerEvents"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
-			"       <!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" +
+			"		<chat enabled=\"true\" prefix=\"ServerEvents\" prefix_color=\"lightblue\" color=\"white\" />\r\n" + 
+			"       <!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" + 
 			"		<twitter enabled=\"true\" accessToken=\"{accessToken}\" accessTokenSecret=\"{accessTokenSecret}\" rate_limit=\"350\" />\r\n" + 
 			"		<database enabled=\"false\" username=\"\" password=\"\" database=\"jdbc:mysql://localhost:3306/minecraft\" table=\"server_events\" driver=\"com.mysql.jdbc.Driver\" />\r\n" + 
 			"	</conf>\r\n" + 
 			"\r\n" + 
 			"	<!--  Messages to be displayed randomly. Default delay is 30 minutes (30min*60sec*1000mili)-->\r\n" + 
-			"	<random enabled=\"true\" delay=\"1800000\">\r\n" + 
+			"	<random enabled=\"true\" delay=\"1800000\" chat=\"true\">\r\n" + 
 			"		<msg>im h a p p y i know i am im sure i am im h a p p y</msg>\r\n" + 
 			"		<msg>i may be going slow at the moment im deleting your creations moo ha ha ha haaa</msg>\r\n" + 
 			"		<msg>im a little teapot short and stout</msg>\r\n" + 
@@ -57,7 +58,7 @@ public class DefaultConfig {
 			"		<msg>if your happy and you know it ...kick a player!</msg>\r\n" + 
 			"	</random>\r\n" + 
 			"	\r\n" + 
-			"	<join enabled=\"true\">\r\n" + 
+			"	<join enabled=\"true\" chat=\"true\">\r\n" + 
 			"		<msg>ooo look %n is back</msg>\r\n" + 
 			"		<msg>if ti isnt my old friend %n, online again</msg>\r\n" + 
 			"		<msg>might as well not sign in %n is online</msg>\r\n" + 
@@ -67,7 +68,7 @@ public class DefaultConfig {
 			"	</join>\r\n" + 
 			"	\r\n" + 
 			"	\r\n" + 
-			"	<quit enabled=\"true\">\r\n" + 
+			"	<quit enabled=\"true\" chat=\"true\">\r\n" + 
 			"		<msg>no come back %n, we miss you already</msg>\r\n" + 
 			"		<msg>*sound of cork being popped* %n has left the server PARTY!</msg>\r\n" + 
 			"		<msg>a wondering soul has eleft the server. Bye %n</msg>\r\n" + 
@@ -129,7 +130,7 @@ public class DefaultConfig {
 			"		%damage => amount of damage taken on final blow\r\n" + 
 			"		%killer => name of player, creature, fire, water, gravity, or explosion\r\n" + 
 			"	 -->\r\n" + 
-			"	<death enabled=\"true\">\r\n" + 
+			"	<death enabled=\"true\" chat=\"true\">\r\n" + 
 			"		<msg>%n is a weakling that was killed by %killer.</msg>\r\n" + 
 			"		<msg killer=\"zombie\">munch munch munch grrr do i have any %n between my teeth?</msg>\r\n" + 
 			"		<msg killer=\"zombie\">brains no more, sorry %n</msg>\r\n" + 
