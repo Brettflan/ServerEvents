@@ -1,5 +1,6 @@
 package org.bukkit.croemmich.serverevents;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 
 import twitter4j.Twitter;
@@ -52,6 +53,16 @@ public class DataSourceTwitter extends DataSource {
 	
 	public static void displayTwitterNow(String msg) {
 		if (msg != null) {
+			if(msg.length() > 129) {
+				msg = msg.substring(0, 128);
+			}
+
+			Calendar c = Calendar.getInstance();
+			String s = "(" + c.get(Calendar.HOUR_OF_DAY) + ":" +
+			           c.get(Calendar.MINUTE) + ":" +
+			        c.get(Calendar.SECOND) + ")";
+			msg += " " + s;
+			
 			try {
 				Twitter twitter = tf.getInstance();
 				twitter.updateStatus(msg);
