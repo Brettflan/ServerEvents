@@ -20,7 +20,7 @@ public class Misc {
 	  return new String [] {text};
 
 	  char [] chars = text.toCharArray();
-	  Vector lines = new Vector();
+	  Vector<String> lines = new Vector<String>();
 	  StringBuffer line = new StringBuffer();
 	  StringBuffer word = new StringBuffer();
 
@@ -54,8 +54,8 @@ public class Misc {
 
 	  String [] ret = new String[lines.size()];
 	  int c = 0; // counter
-	  for (Enumeration e = lines.elements(); e.hasMoreElements(); c++) {
-	    ret[c] = (String) e.nextElement();
+	  for (Enumeration<String> e = lines.elements(); e.hasMoreElements(); c++) {
+	    ret[c] = e.nextElement();
 	  }
 
 	  return ret;
