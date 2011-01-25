@@ -127,7 +127,7 @@ public class DataParser {
 						try {
 							int keep = Integer.parseInt(tmpKeep);
 							if (keep > 0) {
-								
+								finalKeep = keep;
 							} else {
 								log.warning(ServerEvents.configFile + ": 'conf.file.keep_old' should be greater than 0");
 							}
