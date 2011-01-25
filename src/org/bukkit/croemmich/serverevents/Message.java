@@ -12,13 +12,13 @@ public class Message {
 	private String msg;
 	private HashMap<String, String> params;
 	
-	Message(){};
+	public Message(){};
 	
-	Message(String msg) {
+	public Message(String msg) {
 		setMessage(msg);
 	}
 	
-	Message(String msg, HashMap<String, String> params) {
+	public Message(String msg, HashMap<String, String> params) {
 		setMessage(msg);
 		setParams(params);
 	}
@@ -34,9 +34,6 @@ public class Message {
 		while(itr.hasNext()) {
 			String key = itr.next();
 			String value = replacements.get(key);
-			
-			log.info(key + ":" + value);
-			
 			tmp = tmp.replace(key, value);
 		}
 		return tmp;

@@ -4,13 +4,13 @@ import org.bukkit.entity.Player;
 
 public class DataSourceChat extends DataSource {
 
-	public static String prefix = "[ServerEvents] ";
-	public static String prefix_color = "lightblue";
-	public static String color = "white";
+	protected static String prefix = "[ServerEvents] ";
+	protected static String prefix_color = "lightblue";
+	protected static String color = "white";
 	
 	private ServerEvents plugin;
 	
-	public DataSourceChat(ServerEvents plugin, String prefix, String prefix_color, String color) {
+	protected DataSourceChat(ServerEvents plugin, String prefix, String prefix_color, String color) {
 		this.plugin = plugin;
 		DataSourceChat.prefix = prefix;
 		DataSourceChat.prefix_color = prefix_color;
@@ -32,7 +32,7 @@ public class DataSourceChat extends DataSource {
 	}
 
 	@Override
-	public void displayMessage(String msg) {
+	protected void displayMessage(String msg) {
 		msg = prefix_color+prefix+color+msg;
 		
 		for (Player p : plugin.getServer().getOnlinePlayers()) {

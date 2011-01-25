@@ -10,7 +10,7 @@ public class RandomMessageThread implements Runnable {
     
     private ServerEvents se;
     
-    public RandomMessageThread(ServerEvents se) {
+    protected RandomMessageThread(ServerEvents se) {
     	this.se = se;
     }
 
@@ -34,13 +34,13 @@ public class RandomMessageThread implements Runnable {
         }
     }
 
-    public void start() {
+    protected void start() {
         this.running = true;
         thread = new Thread(this);
         thread.start();
     }
 
-    public void stop() {
+    protected void stop() {
         this.running = false;
         thread.interrupt();
     }

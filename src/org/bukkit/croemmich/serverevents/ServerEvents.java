@@ -1,6 +1,7 @@
 package org.bukkit.croemmich.serverevents;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.logging.Logger;
 import org.bukkit.Server;
 import org.bukkit.event.Event;
@@ -17,8 +18,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 */
 public class ServerEvents extends JavaPlugin {
 	protected static final Logger log      = Logger.getLogger("Minecraft");
-	public ServerEventsPlayerListener pl   = new ServerEventsPlayerListener(this);
-	public ServerEventsEntityListener el   = new ServerEventsEntityListener(this);
+	protected ServerEventsPlayerListener pl   = new ServerEventsPlayerListener(this);
+	protected ServerEventsEntityListener el   = new ServerEventsEntityListener(this);
     
     public static final String name        = "ServerEvents";
     public static final String version     = "1.1";
@@ -58,7 +59,7 @@ public class ServerEvents extends JavaPlugin {
 		log.info( name + " version " + version + " is enabled!" );
     }
     
-    public void attachHooks() {
+    protected void attachHooks() {
     	if (Messages.hasMessages(Messages.Type.JOIN))
     		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.Monitor, this);
     	
@@ -85,7 +86,7 @@ public class ServerEvents extends JavaPlugin {
     	}
     }
     
-	public boolean initProps() {
+    protected boolean initProps() {
 		File dir = new File(directory);
 		if (!dir.exists())
 			dir.mkdir();
@@ -97,5 +98,29 @@ public class ServerEvents extends JavaPlugin {
 
 		DataParser dp = new DataParser(this);
 		return dp.load(configFile);
+	}
+    
+    
+    /* API Calls */
+    public static void displayMessage (String message) {
+		DataSource.display(message);
+	}
+	
+	public static void displayMessage (String message, HashMap<String, String> replacements) {
+		Message msg = new Message();
+		msg.setMessage(message);
+		DataSource.display(msg.getMessage(replacements));
+	}
+	
+	public static void addMessage(Messages.Type type, String message) {
+		Messages.addMessage(type, new Message(message));
+	}
+	
+	public static void addMessage(Messages.Type type, String message, HashMap<String, String> params) {
+		Messages.addMessage(type, new Message(message, params));
+	}
+	
+	public static void removeMessage(Messages.Type type, String message) {
+		Messages.removeMessage(type, message);
 	}
 }

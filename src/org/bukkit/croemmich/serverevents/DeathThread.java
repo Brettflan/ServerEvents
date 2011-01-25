@@ -23,7 +23,7 @@ public class DeathThread implements Runnable {
     
     protected static final Logger log = Logger.getLogger("Minecraft");
     
-    public DeathThread(Player player, EntityDamageEvent event) {
+    protected DeathThread(Player player, EntityDamageEvent event) {
     	this.player = player;
     	this.event = event;
     }
@@ -99,13 +99,13 @@ public class DeathThread implements Runnable {
         }
     }
 
-    public void start() {
+    protected void start() {
         this.running = true;
         thread = new Thread(this);
         thread.start();
     }
 
-    public void stop() {
+    protected void stop() {
     	ServerEventsEntityListener.threads.remove(player.getName());
         this.running = false;
         thread.interrupt();

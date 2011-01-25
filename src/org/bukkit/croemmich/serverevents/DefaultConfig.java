@@ -10,7 +10,7 @@ public class DefaultConfig {
 	
 	protected static final Logger log = Logger.getLogger("Minecraft");
 	
-	public static boolean make() {
+	protected static boolean make() {
 		String location = ServerEvents.configFile;
 		if (!new File(location).exists()) {
 			FileWriter writer = null;
@@ -33,7 +33,7 @@ public class DefaultConfig {
 		return false;
 	}
 	
-	public static String conf = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n" + 
+	protected static String conf = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n" + 
 			"\r\n" + 
 			"<serverevents>\r\n" + 
 			"	<conf>\r\n" + 

@@ -3,12 +3,12 @@ package org.bukkit.croemmich.serverevents;
 import java.util.logging.Logger;
 
 public class DisplayThread implements Runnable {
-    public boolean running = false;
+	protected boolean running = false;
     private Thread thread;
     
     protected static final Logger log = Logger.getLogger("Minecraft");
     
-    public DisplayThread() {
+    protected DisplayThread() {
     	
     }
 
@@ -29,13 +29,13 @@ public class DisplayThread implements Runnable {
         }
     }
 
-    public void start() {
+    protected void start() {
         this.running = true;
         thread = new Thread(this);
         thread.start();
     }
 
-    public void stop() {
+    protected void stop() {
         this.running = false;
         thread.interrupt();
         thread = null;

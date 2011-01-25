@@ -9,10 +9,10 @@ import java.util.logging.Level;
 
 public class DataSourceFile extends DataSource {
 
-	public static String uri;
-	public static int keep_old = 5;
+	protected static String uri;
+	protected static int keep_old = 5;
 	
-	public DataSourceFile(String uri, Integer keep_old) {
+	protected DataSourceFile(String uri, Integer keep_old) {
 		DataSourceFile.uri = uri;
 		DataSourceFile.keep_old = keep_old;
 		
@@ -47,7 +47,7 @@ public class DataSourceFile extends DataSource {
 	}
 
 	@Override
-	public void displayMessage(String msg) {
+	protected void displayMessage(String msg) {
 		FileWriter writer = null;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(uri)));

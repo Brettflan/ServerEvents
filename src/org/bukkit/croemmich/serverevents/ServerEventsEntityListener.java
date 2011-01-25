@@ -13,8 +13,8 @@ import org.bukkit.event.entity.EntityListener;
 
 public class ServerEventsEntityListener extends EntityListener {
 	
-	public static ArrayList<String> threads = new ArrayList<String>();
-	public static HashMap<String, Long> lastDeath = new HashMap<String, Long>();
+	protected static ArrayList<String> threads = new ArrayList<String>();
+	protected static HashMap<String, Long> lastDeath = new HashMap<String, Long>();
 	
 	//private final ServerEvents plugin;
 	ServerEventsEntityListener(ServerEvents plugin) {

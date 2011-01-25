@@ -11,16 +11,16 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class DataSourceTwitter extends DataSource {
 
-	public static int rate_limit = 350;
-	public static String accessToken = "";
-	public static String accessTokenSecret = "";
+	protected static int rate_limit = 350;
+	protected static String accessToken = "";
+	protected static String accessTokenSecret = "";
 	
-	public static LinkedList<String> twitterQueue = new LinkedList<String>();
-	TwitterDisplayThread twitterThread = null;
+	protected static LinkedList<String> twitterQueue = new LinkedList<String>();
+	protected TwitterDisplayThread twitterThread = null;
 	
 	private static TwitterFactory tf;
 	
-	public DataSourceTwitter(String accessToken, String accessTokenSecret, int rate_limit) {
+	protected DataSourceTwitter(String accessToken, String accessTokenSecret, int rate_limit) {
 		DataSourceTwitter.accessToken = accessToken;
 		DataSourceTwitter.accessTokenSecret = accessTokenSecret;
 		DataSourceTwitter.rate_limit = rate_limit;
@@ -42,7 +42,7 @@ public class DataSourceTwitter extends DataSource {
 	}
 
 	@Override
-	public void displayMessage(String msg) {
+	protected void displayMessage(String msg) {
 		twitterQueue.add(msg);
 		if (twitterThread == null) {
 			twitterThread = new TwitterDisplayThread();
@@ -52,7 +52,7 @@ public class DataSourceTwitter extends DataSource {
 		}
 	}
 	
-	public static void displayTwitterNow(String msg) {
+	protected static void displayTwitterNow(String msg) {
 		if (msg != null) {
 			Date today;
 			String output;

@@ -15,11 +15,11 @@ public class DataParser {
 	
 	private ServerEvents plugin;
 	
-	public DataParser(ServerEvents plugin) {
+	protected DataParser(ServerEvents plugin) {
 		this.plugin = plugin;
 	}
 	
-	public boolean load (String url) {
+	protected boolean load (String url) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
@@ -31,7 +31,7 @@ public class DataParser {
 		return false;
 	}
 
-	class DataHandler extends DefaultHandler {
+	protected class DataHandler extends DefaultHandler {
 		boolean conf = false;
 		boolean queue = false;
 		boolean file = false;

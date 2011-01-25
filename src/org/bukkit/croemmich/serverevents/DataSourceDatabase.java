@@ -27,7 +27,7 @@ public class DataSourceDatabase extends DataSource {
     private static String sqlInsert			   = "INSERT INTO `"+table+"` (`msg`, `time`) VALUES (?, NOW())";
 	
 
-	public DataSourceDatabase(String username, String password, String database, String table, String driver) {
+    protected DataSourceDatabase(String username, String password, String database, String table, String driver) {
 		DataSourceDatabase.username = username;
 		DataSourceDatabase.password = password;
 		DataSourceDatabase.database = database;
@@ -37,7 +37,7 @@ public class DataSourceDatabase extends DataSource {
 	}
 
 	@Override
-	public void displayMessage(String msg) {
+	protected void displayMessage(String msg) {
 		execute(sqlInsert,msg);
 	}
 	
