@@ -37,7 +37,7 @@ public final class Register {
      *
      * @param args message
      */
-	protected static void main(String[] args) {
+	public static void main(String[] args) {
         try {
         	ConfigurationBuilder cb = new ConfigurationBuilder();
         	cb.setDebugEnabled(true)
