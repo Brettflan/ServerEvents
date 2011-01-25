@@ -13,7 +13,11 @@ public class DataParser {
 	
 	protected static final Logger log = Logger.getLogger("Minecraft");
 	
-	public DataParser() {}
+	private ServerEvents plugin;
+	
+	public DataParser(ServerEvents plugin) {
+		this.plugin = plugin;
+	}
 	
 	public boolean load (String url) {
 		try {
@@ -33,6 +37,7 @@ public class DataParser {
 		boolean file = false;
 		boolean twitter = false;
 		boolean database = false;
+		boolean chat = false;
 		boolean random = false;
 		boolean join = false;
 		boolean quit = false;
@@ -153,6 +158,11 @@ public class DataParser {
 				database = true;
 				if (enabled) {
 					DataSource.addDatabaseDataSource(attributes.getValue("username"), attributes.getValue("password"), attributes.getValue("database"), attributes.getValue("table"), attributes.getValue("driver"));
+				}
+			} else if (qName.equalsIgnoreCase("chat")) {
+				chat = true;
+				if (enabled) {
+					DataSource.addChatDataSource(plugin, attributes.getValue("prefix"), attributes.getValue("prefix_color"), attributes.getValue("color"));
 				}
 			} else if (qName.equalsIgnoreCase("random")) {
 				random = true;

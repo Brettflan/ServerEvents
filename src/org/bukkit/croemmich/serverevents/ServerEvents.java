@@ -95,7 +95,7 @@ public class ServerEvents extends JavaPlugin {
 			DefaultConfig.make();
 		}
 
-		DataParser dp = new DataParser();
+		DataParser dp = new DataParser(this);
 		return dp.load(configFile);
 	}
 }

@@ -34,6 +34,11 @@ public abstract class DataSource {
 		ds.add(new DataSourceFile(uri, keep_old));
 	}
 	
+
+	public static void addChatDataSource(ServerEvents plugin, String prefix, String prefix_color, String color) {
+		ds.add(new DataSourceChat(plugin, prefix, prefix_color, color));
+	}
+	
 	public static void display(String msg) {
 		if (enableQueue) {
 			while (queue.size() >= hold) {
@@ -58,7 +63,7 @@ public abstract class DataSource {
 			while (itr.hasNext()) {
     			itr.next().displayMessage(msg);
     		}
-			log.info("Message: " + msg);
+			log.info("ServerEvents: " + msg);
 		}
 	}
 }
