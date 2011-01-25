@@ -228,6 +228,8 @@ public class DataParser {
 				file = false;
 			} else if (qName.equalsIgnoreCase("twitter")) {
 				twitter = false;
+			} else if (qName.equalsIgnoreCase("chat")) {
+				chat = false;
 			} else if (qName.equalsIgnoreCase("database")) {
 				database = false;
 			} else if (qName.equalsIgnoreCase("random")) {
