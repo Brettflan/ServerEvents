@@ -22,7 +22,7 @@ public class ServerEvents extends JavaPlugin {
 	protected ServerEventsEntityListener el   = new ServerEventsEntityListener(this);
     
     public static final String name        = "ServerEvents";
-    public static final String version     = "1.1";
+    public static final String version     = "1.2";
     public static final String directory   = "ServerEvents" + File.separatorChar;
     public static final String configFile  = directory + "server_events.xml";
     
