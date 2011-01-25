@@ -1,6 +1,7 @@
 package org.bukkit.croemmich.serverevents;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 import twitter4j.Twitter;
@@ -53,15 +54,19 @@ public class DataSourceTwitter extends DataSource {
 	
 	public static void displayTwitterNow(String msg) {
 		if (msg != null) {
-			if(msg.length() > 129) {
-				msg = msg.substring(0, 128);
-			}
+			Date today;
+			String output;
+			SimpleDateFormat formatter;
 
-			Calendar c = Calendar.getInstance();
-			String s = "(" + c.get(Calendar.HOUR_OF_DAY) + ":" +
-			           c.get(Calendar.MINUTE) + ":" +
-			        c.get(Calendar.SECOND) + ")";
-			msg += " " + s;
+			formatter = new SimpleDateFormat("hh:mm:ss z");
+			today = new Date();
+			output = formatter.format(today);
+			
+			if(msg.length() >= 140-output.length()+1) {
+				msg = msg.substring(0, 140-output.length()+1);
+			}
+			
+			msg += " " + output;
 			
 			try {
 				Twitter twitter = tf.getInstance();
