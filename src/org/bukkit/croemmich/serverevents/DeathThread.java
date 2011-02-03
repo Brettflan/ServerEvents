@@ -80,7 +80,7 @@ public class DeathThread implements Runnable {
     				break;
     			case BLOCK_EXPLOSION: type = DeathType.EXPLOSION; break;
     			case CONTACT: type = DeathType.CONTACT; break;
-    			case DROWNING: type = DeathType.BURNING; break; //TODO: CHANGE THIS WHEN BUKKIT IS FIXED
+    			case DROWNING: type = DeathType.DROWNING; break;
     			case ENTITY_EXPLOSION: type = DeathType.CREEPER; type2 = DeathType.CREATURE; break;
     			case FALL: type = DeathType.FALLING; break;
     			case FIRE:

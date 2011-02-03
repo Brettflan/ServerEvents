@@ -394,7 +394,7 @@ public class DefaultConfig {
 			"            spider\r\n" + 
 			"            contact (cactus)\r\n" + 
 			"            explosion (non creeper)\r\n" + 
-			"            drowning (NOT WORKING YET)\r\n" + 
+			"            drowning\r\n" + 
 			"            falling\r\n" + 
 			"            burning\r\n" + 
 			"            lava\r\n" + 
