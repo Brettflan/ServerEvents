@@ -39,6 +39,7 @@ public class DefaultConfig {
 			"		<!--  Queueing ensures that messages are not displayed too quickly. -->\r\n" + 
 			"		<queue enabled=\"true\" messages_per_minute=\"12\" messages_to_hold=\"10\" />\r\n" + 
 			"		<file enabled=\"false\" uri=\"ServerEvents"+File.separatorChar+"plugins"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
+			"		<!--  See https://github.com/Bukkit/Bukkit/blob/master/src/main/java/org/bukkit/ChatColor.java for colors. -->\r\n" + 
 			"		<chat enabled=\"true\" prefix=\"[ServerEvents] \" prefix_color=\"aqua\" color=\"white\" />\r\n" + 
 			"		<!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" + 
 			"		<twitter enabled=\"false\" accessToken=\"{accessToken}\" accessTokenSecret=\"{accessTokenSecret}\" rate_limit=\"350\" />\r\n" + 
