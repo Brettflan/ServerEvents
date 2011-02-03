@@ -33,19 +33,39 @@ public class DefaultConfig {
 		return false;
 	}
 	
-	protected static String conf = "<?xml version=\"1.0\"?>\r\n" + 
+	protected static String conf = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n" + 
 			"<serverevents>\r\n" + 
 			"	<conf>\r\n" + 
 			"		<!--  Queueing ensures that messages are not displayed too quickly. -->\r\n" + 
 			"		<queue enabled=\"true\" messages_per_minute=\"12\" messages_to_hold=\"10\" />\r\n" + 
 			"		<file enabled=\"false\" uri=\"ServerEvents"+File.separatorChar+"plugins"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
-			"		<chat enabled=\"true\" prefix=\"[ServerEvents] \" prefix_color=\"lightblue\" color=\"white\" />\r\n" + 
+			"		<chat enabled=\"true\" prefix=\"[ServerEvents] \" prefix_color=\"aqua\" color=\"white\" />\r\n" + 
 			"		<!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" + 
 			"		<twitter enabled=\"false\" accessToken=\"{accessToken}\" accessTokenSecret=\"{accessTokenSecret}\" rate_limit=\"350\" />\r\n" + 
 			"		<database enabled=\"false\" username=\"\" password=\"\" database=\"jdbc:mysql://localhost:3306/minecraft\" table=\"server_events\" driver=\"com.mysql.jdbc.Driver\" />\r\n" + 
 			"	</conf>\r\n" + 
+			"	\r\n" + 
+			"	<!-- Replacements always available -->\r\n" + 
+			"    <!--\r\n" + 
+			"        %ip => ip address of the server\r\n" + 
+			"		%hostname => hostname of the server\r\n" + 
+			"		%name => probably \"Craftbukkit\"\r\n" + 
+			"		%version => similar to \"0.0.0-316-g0c36361 (MC: 1.2_01)\"\r\n" + 
+			"		%protocol => similar to \"1.2_01\"\r\n" + 
+			"		%players => comma seperated list of players online\r\n" + 
+			"    -->\r\n" + 
+			"	\r\n" + 
+			"	<!-- Replacements available on all user events -->\r\n" + 
+			"    <!--\r\n" + 
+			"        %n => player's name\r\n" + 
+			"		%n_health => player's health\r\n" + 
+			"		%n_ip => player's ip\r\n" + 
+			"		%n_hostname => player's hostname\r\n" + 
+			"		%n_item =>  item in player's hand\r\n" + 
+			"    -->\r\n" + 
+			"	\r\n" + 
 			"    <!--  Messages to be displayed randomly. Default delay is 30 minutes (30min*60sec*1000mili)-->\r\n" + 
-			"    <random enabled=\"true\" delay=\"1800000\">\r\n" + 
+			"    <random enabled=\"true\" file=\"false\" chat=\"false\" twitter=\"true\" database=\"true\" delay=\"1800000\">\r\n" + 
 			"        <msg>I`m h a p p y I know I am I'm sure i am I'm h a p p y</msg>\r\n" + 
 			"        <msg>I may be going slow at the moment I'm deleting your creations moo ha ha ha haaa</msg>\r\n" + 
 			"        <msg>I`m a little teapot short and stout</msg>\r\n" + 
@@ -140,6 +160,17 @@ public class DefaultConfig {
 			"        <msg>Players are like buses, you wait ages for one to join then 3 log on at once</msg>\r\n" + 
 			"        <msg>Come to the dark side.... we have cookies</msg>\r\n" + 
 			"    </random>\r\n" + 
+			"	\r\n" + 
+			"	<!-- Messages to use when the plugin is enabled (server start) -->\r\n" + 
+			"	<start enabled=\"true\">\r\n" + 
+			"		<msg>The server is back up at %hostname!</msg>\r\n" + 
+			"		<msg>The server is back up at %ip!</msg>\r\n" + 
+			"	</start>\r\n" + 
+			"	\r\n" + 
+			"	<!-- Messages to use when the plugin is disabled (server stop) -->\r\n" + 
+			"	<stop enabled=\"true\">\r\n" + 
+			"		<msg>The server is down :(</msg>\r\n" + 
+			"	</stop>\r\n" + 
 			"\r\n" + 
 			"    <join enabled=\"true\">\r\n" + 
 			"        <msg>Ooo look %n is back</msg>\r\n" + 
@@ -373,6 +404,7 @@ public class DefaultConfig {
 			"        extra replacements:\r\n" + 
 			"        %damage => amount of damage taken on final blow\r\n" + 
 			"        %killer => name of player, creature, fire, water, gravity, or explosion\r\n" + 
+			"		%killer_item => item in kill's hand or the same as %killer if not a player.\r\n" + 
 			"     -->\r\n" + 
 			"    <death enabled=\"true\">\r\n" + 
 			"        <msg>%n is a weakling that was killed by %killer.</msg>\r\n" + 
