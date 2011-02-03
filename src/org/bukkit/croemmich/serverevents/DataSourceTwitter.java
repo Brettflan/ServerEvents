@@ -42,13 +42,15 @@ public class DataSourceTwitter extends DataSource {
 	}
 
 	@Override
-	protected void displayMessage(String msg) {
-		twitterQueue.add(msg);
-		if (twitterThread == null) {
-			twitterThread = new TwitterDisplayThread();
-		} 
-		if (!twitterThread.running) {
-			twitterThread.start();
+	protected void displayMessage(Messages.Type type, String msg) {
+		if (!DataSource.isDisabled(Type.TWITTER, type)) {
+			twitterQueue.add(msg);
+			if (twitterThread == null) {
+				twitterThread = new TwitterDisplayThread();
+			} 
+			if (!twitterThread.running) {
+				twitterThread.start();
+			}
 		}
 	}
 	

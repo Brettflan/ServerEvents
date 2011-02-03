@@ -2,6 +2,8 @@ package org.bukkit.croemmich.serverevents;
 
 import java.util.logging.Logger;
 
+import org.bukkit.croemmich.serverevents.Messages.Type;
+
 public class DisplayThread implements Runnable {
 	protected boolean running = false;
     private Thread thread;
@@ -20,7 +22,8 @@ public class DisplayThread implements Runnable {
     		}
         	
         	String msg = DataSource.queue.remove();
-    		DataSource.displayNow(msg);
+        	Type type = DataSource.typeQueue.remove();
+    		DataSource.displayNow(type, msg);
     		
             try {
                 Thread.sleep(60000/DataSource.mpm);

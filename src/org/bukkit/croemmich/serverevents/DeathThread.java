@@ -3,6 +3,7 @@ package org.bukkit.croemmich.serverevents;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import org.bukkit.croemmich.serverevents.Messages.Type;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.PigZombie;
@@ -92,7 +93,7 @@ public class DeathThread implements Runnable {
     		if (msg != null) {
         		HashMap<String, String> replacements = Messages.getReplacementsForDeath(type, damager, event.getDamage());
         		replacements.putAll(Messages.getReplacementsForPlayer(player));
-        		DataSource.display(msg.getMessage(replacements));
+        		DataSource.display(Type.DEATH, msg.getMessage(replacements));
         	}
 
             this.stop();

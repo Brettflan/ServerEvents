@@ -1,11 +1,12 @@
 package org.bukkit.croemmich.serverevents;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class DataSourceChat extends DataSource {
 
 	protected static String prefix = "[ServerEvents] ";
-	protected static String prefix_color = "lightblue";
+	protected static String prefix_color = "aqua";
 	protected static String color = "white";
 	
 	private ServerEvents plugin;
@@ -16,8 +17,8 @@ public class DataSourceChat extends DataSource {
 		DataSourceChat.prefix_color = prefix_color;
 		DataSourceChat.color = color;
 		
-		String tmpPrefix_color = Colors.fromName(prefix_color.toLowerCase()).getCharacter();
-		String tmpColor = Colors.fromName(color.toLowerCase()).getCharacter();
+		String tmpPrefix_color = ChatColor.valueOf(prefix_color.toUpperCase()).toString();
+		String tmpColor = ChatColor.valueOf(color.toUpperCase()).toString();
 		
 		if (tmpPrefix_color == null || tmpPrefix_color.equalsIgnoreCase("")) {
 			log.warning("ServerEvents: invalid prefix_color.");
@@ -32,19 +33,21 @@ public class DataSourceChat extends DataSource {
 	}
 
 	@Override
-	protected void displayMessage(String msg) {
-		msg = prefix_color+prefix+color+msg;
-		
-		for (Player p : plugin.getServer().getOnlinePlayers()) {
-			boolean first = true;
-			for (String text : Misc.wrapText(msg, 65)) {
-				if (first) {
-					p.sendMessage(text);
-					first = false;
-				} else {
-					p.sendMessage(color+text);
+	protected void displayMessage(Messages.Type type, String msg) {
+		if (!DataSource.isDisabled(Type.CHAT, type)) {
+			msg = prefix_color+prefix+color+msg;
+			
+			for (Player p : plugin.getServer().getOnlinePlayers()) {
+				boolean first = true;
+				for (String text : Misc.wrapText(msg, 60)) {
+					if (first) {
+						p.sendMessage(text);
+						first = false;
+					} else {
+						p.sendMessage(color+text);
+					}
+					
 				}
-				
 			}
 		}
 	}

@@ -47,29 +47,31 @@ public class DataSourceFile extends DataSource {
 	}
 
 	@Override
-	protected void displayMessage(String msg) {
-		FileWriter writer = null;
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File(uri)));
-			String line = "";
-			StringBuilder toSave = new StringBuilder(msg+"\r\n");
-			int n = 1;
-			while ((line = reader.readLine()) != null && n < keep_old) {
-				toSave.append(line+"\r\n");
-				n++;
-			}
-			reader.close();
-			writer = new FileWriter(uri);
-			writer.write(toSave.toString());
-		} catch (Exception e1) {
-			log.log(Level.SEVERE, "Exception while writing to " + uri);
-		} finally {
+	protected void displayMessage(Messages.Type type, String msg) {
+		if (!DataSource.isDisabled(Type.FILE, type)) {
+			FileWriter writer = null;
 			try {
-				if (writer != null) {
-					writer.close();
+				BufferedReader reader = new BufferedReader(new FileReader(new File(uri)));
+				String line = "";
+				StringBuilder toSave = new StringBuilder(msg+"\r\n");
+				int n = 1;
+				while ((line = reader.readLine()) != null && n < keep_old) {
+					toSave.append(line+"\r\n");
+					n++;
 				}
-			} catch (IOException ex) {
-				log.log(Level.SEVERE, "Exception while closing writer for "	+ uri);
+				reader.close();
+				writer = new FileWriter(uri);
+				writer.write(toSave.toString());
+			} catch (Exception e1) {
+				log.log(Level.SEVERE, "Exception while writing to " + uri);
+			} finally {
+				try {
+					if (writer != null) {
+						writer.close();
+					}
+				} catch (IOException ex) {
+					log.log(Level.SEVERE, "Exception while closing writer for "	+ uri);
+				}
 			}
 		}
 	}

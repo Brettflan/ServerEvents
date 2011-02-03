@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import org.bukkit.Server;
+import org.bukkit.croemmich.serverevents.Messages.Type;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -21,15 +22,18 @@ public class ServerEvents extends JavaPlugin {
 	protected ServerEventsPlayerListener pl   = new ServerEventsPlayerListener(this);
 	protected ServerEventsEntityListener el   = new ServerEventsEntityListener(this);
     
-    public static final String name        = "ServerEvents";
-    public static final String version     = "1.2";
-    public static final String directory   = "ServerEvents" + File.separatorChar;
+    public final String name               = getDescription().getName();
+    public final String version            = getDescription().getVersion();
+    public static final String directory   = "plugins" + File.separatorChar + "ServerEvents" + File.separatorChar;
     public static final String configFile  = directory + "server_events.xml";
+    
+    public static Server server;
     
     private RandomMessageThread randomMessageThread;
     
     public ServerEvents(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader) {
         super(pluginLoader, instance, desc, folder, plugin, cLoader);
+        server = this.getServer();
     }
 
     @Override
@@ -39,11 +43,32 @@ public class ServerEvents extends JavaPlugin {
     		randomMessageThread = null;
     	}
     	
+		Message msg = Messages.getRandomMessage(Messages.Type.STOP);
+    	if (msg != null) {
+    		DataSource.display(Type.STOP, msg.getMessage());
+    	}
+    	
 		log.info(name + " " + version + " disabled");
     }
 
     @Override
     public void onEnable() {
+    	File confdir = new File("ServerEvents"); 
+    	if (confdir.exists()) {
+    		File newdir = new File(directory);
+    		if (!confdir.renameTo(newdir)) {
+    			log.severe(name + ": Could not move the ServerEvents directory to the plugin folder. Please do so and restart your server.");
+    			getServer().getPluginManager().disablePlugin(this);
+    			return;
+    		} else {
+    			log.warning("****************************************");
+    			log.warning(name + ": The ServerEvents directory has been moved to plugins/ServerEvents. Update file references in server_events.xml and then restart the minecraft server.");
+    			log.warning("****************************************");
+    			getServer().getPluginManager().disablePlugin(this);
+    			return;
+    		}
+    	}
+    	
     	if (!initProps()) {
 			log.severe(name + ": Could not initialise " + configFile);
 			getServer().getPluginManager().disablePlugin(this);
@@ -57,6 +82,11 @@ public class ServerEvents extends JavaPlugin {
     	randomMessageThread.start();
 
 		log.info( name + " version " + version + " is enabled!" );
+		
+		Message msg = Messages.getRandomMessage(Messages.Type.START);
+    	if (msg != null) {
+    		DataSource.display(Type.START, msg.getMessage());
+    	}
     }
     
     protected void attachHooks() {
@@ -103,13 +133,21 @@ public class ServerEvents extends JavaPlugin {
     
     /* API Calls */
     public static void displayMessage (String message) {
-		DataSource.display(message);
+    	displayMessage(Type.CUSTOM, message);
+	}
+    
+    public static void displayMessage (Type type, String message) {
+		DataSource.display(type, message);
+	}
+    
+    public static void displayMessage (String message, HashMap<String, String> replacements) {
+    	displayMessage(Type.CUSTOM, message, replacements);
 	}
 	
-	public static void displayMessage (String message, HashMap<String, String> replacements) {
+	public static void displayMessage (Type type, String message, HashMap<String, String> replacements) {
 		Message msg = new Message();
 		msg.setMessage(message);
-		DataSource.display(msg.getMessage(replacements));
+		DataSource.display(type, msg.getMessage(replacements));
 	}
 	
 	public static void addMessage(Messages.Type type, String message) {

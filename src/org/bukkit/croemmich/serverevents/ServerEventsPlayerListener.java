@@ -2,6 +2,7 @@ package org.bukkit.croemmich.serverevents;
 
 import java.util.HashMap;
 
+import org.bukkit.croemmich.serverevents.Messages.Type;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -17,7 +18,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerEvent event) {
     	Message msg = Messages.getRandomMessage(Messages.Type.JOIN);
     	if (msg != null) {
-    		DataSource.display(msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
+    		DataSource.display(Type.JOIN, msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
     	}
     }
 
@@ -25,7 +26,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     public void onPlayerQuit(PlayerEvent event) {
     	Message msg = Messages.getRandomMessage(Messages.Type.QUIT);
     	if (msg != null) {
-    		DataSource.display(msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
+    		DataSource.display(Type.QUIT, msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
     	}
     	
     	// Clean Up
@@ -41,7 +42,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     	if (msg != null) {
     		HashMap<String, String> replacements = Messages.getReplacementsForPlayer(event.getPlayer());
     		replacements.putAll(Messages.getReplacementsForCommand(command));
-    		DataSource.display(msg.getMessage(replacements));
+    		DataSource.display(Type.COMMAND, msg.getMessage(replacements));
     	}
     	
     }

@@ -24,17 +24,24 @@ public class Message {
 	}
 	
 	public String getMessage() {
+		if (ServerEvents.server != null) {
+			return getMessage(Messages.getReplacementsForServer(ServerEvents.server));
+		}
 		return msg;
 	}
 	
 	public String getMessage(HashMap<String, String> replacements) {
-		String tmp = getMessage();
+		if (ServerEvents.server != null) {
+			replacements.putAll(Messages.getReplacementsForServer(ServerEvents.server));
+		}
+		String tmp = msg;
 		TreeSet<String> ts = new TreeSet<String>(replacements.keySet());
 		Iterator<String> itr = ts.descendingIterator();
 		while(itr.hasNext()) {
 			String key = itr.next();
 			String value = replacements.get(key);
 			tmp = tmp.replace(key, value);
+			log.info(key + "->" + value);
 		}
 		return tmp;
 	}

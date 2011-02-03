@@ -2,6 +2,7 @@ package org.bukkit.croemmich.serverevents;
 
 import java.util.Random;
 
+import org.bukkit.croemmich.serverevents.Messages.Type;
 import org.bukkit.entity.Player;
 
 public class RandomMessageThread implements Runnable {
@@ -28,7 +29,7 @@ public class RandomMessageThread implements Runnable {
             		Random generator = new Random();
             		int idx = generator.nextInt(players.length);
 	            	String message = msg.getMessage(Messages.getReplacementsForPlayer(players[idx]));
-	            	DataSource.display(message);
+	            	DataSource.display(Type.RANDOM, message);
             	}
             }
         }

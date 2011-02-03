@@ -37,8 +37,10 @@ public class DataSourceDatabase extends DataSource {
 	}
 
 	@Override
-	protected void displayMessage(String msg) {
-		execute(sqlInsert,msg);
+	protected void displayMessage(Messages.Type type, String msg) {
+		if (!DataSource.isDisabled(Type.DATABASE, type)) {
+			execute(sqlInsert,msg);
+		}
 	}
 	
 	private Connection getConnection() throws SQLException {

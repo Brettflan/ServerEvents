@@ -1,10 +1,13 @@
 package org.bukkit.croemmich.serverevents;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Logger;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.bukkit.croemmich.serverevents.DataSource.Type;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -26,7 +29,12 @@ public class DataParser {
 			DataHandler handler = new DataHandler();
 			saxParser.parse(url, handler);
 			return true;
-		} catch (Exception e) {
+		} catch (SAXException e) {
+			log.severe(e.getMessage());
+		} catch (IOException e2) {
+			log.severe(e2.getMessage());
+		} catch (ParserConfigurationException e3) {
+			log.severe(e3.getMessage());
 		}
 		return false;
 	}
@@ -48,6 +56,8 @@ public class DataParser {
 		boolean block = false;
 		boolean msg = false;
 		boolean enabled = true;
+		boolean start = false;
+		boolean stop = false;
 		
 		String msgString = "";
 		Message curMessage;
@@ -68,6 +78,32 @@ public class DataParser {
 					enabled = false;
 				} else {
 					enabled = true;
+				}
+			}
+			
+			if (qName.equalsIgnoreCase("random") || qName.equalsIgnoreCase("join") || qName.equalsIgnoreCase("quit") || 
+				qName.equalsIgnoreCase("ban") || qName.equalsIgnoreCase("kick") || qName.equalsIgnoreCase("command") || 
+				qName.equalsIgnoreCase("death") || qName.equalsIgnoreCase("start") || qName.equalsIgnoreCase("stop")) {
+				
+				String fileStr = attributes.getValue("file");
+				String chatStr = attributes.getValue("chat");
+				String twitterStr = attributes.getValue("twitter");
+				String databaseStr = attributes.getValue("database");
+				
+				if (fileStr != null && (fileStr.equalsIgnoreCase("false") || fileStr.equalsIgnoreCase("no"))) {
+					DataSource.addToDisabled(Type.FILE, qName.toLowerCase());
+				}
+				
+				if (chatStr != null && (chatStr.equalsIgnoreCase("false") || chatStr.equalsIgnoreCase("no"))) {
+					DataSource.addToDisabled(Type.CHAT, qName.toLowerCase());
+				}
+				
+				if (twitterStr != null && (twitterStr.equalsIgnoreCase("false") || twitterStr.equalsIgnoreCase("no"))) {
+					DataSource.addToDisabled(Type.TWITTER, qName.toLowerCase());
+				}
+				
+				if (databaseStr != null && (databaseStr.equalsIgnoreCase("false") || databaseStr.equalsIgnoreCase("no"))) {
+					DataSource.addToDisabled(Type.DATABASE, qName.toLowerCase());
 				}
 			}
 
@@ -188,6 +224,10 @@ public class DataParser {
 				death = true;
 			} else if (qName.equalsIgnoreCase("block")) {
 				block = true;
+			} else if (qName.equalsIgnoreCase("start")) {
+				start = true;
+			} else if (qName.equalsIgnoreCase("stop")) {
+				stop = true;
 			}
 		}
 		
@@ -219,6 +259,10 @@ public class DataParser {
 					Messages.addMessage(Messages.Type.DEATH, curMessage);
 				} else if (block) {
 					Messages.addMessage(Messages.Type.BLOCK, curMessage);
+				} else if (start) {
+					Messages.addMessage(Messages.Type.START, curMessage);
+				} else if (stop) {
+					Messages.addMessage(Messages.Type.STOP, curMessage);
 				}
 			} else if (qName.equalsIgnoreCase("conf")) {
 				conf = false;
@@ -248,6 +292,10 @@ public class DataParser {
 				death = false;
 			} else if (qName.equalsIgnoreCase("block")) {
 				block = false;
+			} else if (qName.equalsIgnoreCase("start")) {
+				start = false;
+			} else if (qName.equalsIgnoreCase("stop")) {
+				stop = false;
 			}
 		}
 	}

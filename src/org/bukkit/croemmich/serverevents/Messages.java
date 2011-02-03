@@ -1,5 +1,7 @@
 package org.bukkit.croemmich.serverevents;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -17,6 +20,8 @@ public class Messages {
 	protected static final Logger log = Logger.getLogger("Minecraft");
 
 	private static ArrayList<Message> randomMessages  = new ArrayList<Message>();
+	private static ArrayList<Message> startMessages   = new ArrayList<Message>();
+	private static ArrayList<Message> stopMessages    = new ArrayList<Message>();
 	private static ArrayList<Message> joinMessages    = new ArrayList<Message>();
 	private static ArrayList<Message> quitMessages    = new ArrayList<Message>();
 	private static ArrayList<Message> kickMessages    = new ArrayList<Message>();
@@ -28,13 +33,15 @@ public class Messages {
 	public static int randomDelay = 1800000;
 	
 	public static enum Type {
-		RANDOM, JOIN, QUIT, KICK, BAN, COMMAND, DEATH, BLOCK
+		RANDOM, JOIN, START, STOP, QUIT, KICK, BAN, COMMAND, DEATH, BLOCK, CUSTOM
 	}
 
 	public static ArrayList<Message> getMessages(Type type) {
 		switch (type) {
 			case RANDOM: return randomMessages;
 			case JOIN: return joinMessages;
+			case START: return startMessages;
+			case STOP: return stopMessages;
 			case QUIT: return quitMessages;
 			case KICK: return kickMessages;
 			case BAN: return banMessages;
@@ -59,6 +66,8 @@ public class Messages {
 			case RANDOM: randomMessages.add(msg); break;
 			case JOIN: joinMessages.add(msg); break;
 			case QUIT: quitMessages.add(msg); break;
+			case START: startMessages.add(msg); break;
+			case STOP: stopMessages.add(msg); break;
 			case KICK: kickMessages.add(msg); break;
 			case BAN: banMessages.add(msg); break;
 			case COMMAND: commandMessages.add(msg); break;
@@ -72,6 +81,8 @@ public class Messages {
 		
 		switch (type) {
 			case RANDOM: tmp = randomMessages; break;
+			case START: tmp = startMessages; break;
+			case STOP: tmp = stopMessages; break;
 			case JOIN: tmp = joinMessages; break;
 			case QUIT: tmp = quitMessages; break;
 			case KICK: tmp = kickMessages; break;
@@ -95,6 +106,8 @@ public class Messages {
 			case RANDOM: randomMessages = tmp; break;
 			case JOIN: joinMessages = tmp; break;
 			case QUIT: quitMessages = tmp; break;
+			case START: startMessages = tmp; break;
+			case STOP: stopMessages = tmp; break;
 			case KICK: kickMessages = tmp; break;
 			case BAN: banMessages = tmp; break;
 			case COMMAND: commandMessages = tmp; break;
@@ -116,12 +129,14 @@ public class Messages {
 	public static HashMap<String, String> getReplacementsForPlayer(Player player) {
 		HashMap<String, String> replacements = new HashMap<String, String>();
 		if (player != null) {
-			replacements.put("%n", player.getName());
+			replacements.put("%n", player.getDisplayName());
 			replacements.put("%n_health", String.valueOf(player.getHealth()));
+			replacements.put("%n_ip", player.getAddress().getAddress().getHostAddress());
+			replacements.put("%n_hostname", player.getAddress().getAddress().getCanonicalHostName());
 			if (player.getItemInHand().getType() == Material.AIR) {
 				replacements.put("%n_item", "nothing");
 			} else {
-				replacements.put("%n_item", player.getItemInHand().getType().name().toLowerCase());
+				replacements.put("%n_item", player.getItemInHand().getType().name().toLowerCase().replace("_", " "));
 			}
 		}
 		return replacements;
@@ -223,9 +238,10 @@ public class Messages {
 		HashMap<String, String> replacements = new HashMap<String, String>();
 
 		String killer = "unknown";
+		String item = "unknown";
 		
 		switch(type) {
-			case PLAYER: killer = ((Player)entity).getName(); break;
+			case PLAYER: killer = ((Player)entity).getDisplayName(); item = ((Player)entity).getItemInHand().getType().name().toLowerCase().replace("_", " "); break;
 			case CREATURE: killer = "a strange creature"; break;
 			case ZOMBIE: killer = "a zombie"; break;
 			case GHAST: killer = "a ghast"; break;
@@ -243,8 +259,48 @@ public class Messages {
 			case SUFFOCATION: killer = "suffocating"; break;
 		}
 		
+		if (item == null || item.equalsIgnoreCase("unknown")) {
+			item = killer;
+		}
+		
 		replacements.put("%damage", String.valueOf(damage));
-		replacements.put("%killer", killer);		
+		replacements.put("%killer", killer);
+		replacements.put("%killer_item", item);
+		return replacements;
+	}
+	
+	public static HashMap<String, String> getReplacementsForServer(Server server) {
+		HashMap<String, String> replacements = new HashMap<String, String>();
+		
+		replacements.put("$name", server.getName());
+		Pattern pattern = Pattern.compile(".*\\(MC:\\s(.*)\\).*", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(server.getVersion());
+		if (matcher.matches() && matcher.groupCount() > 0) {
+			replacements.put("%protocol", matcher.group(1));
+		} else {
+			replacements.put("%protocol", server.getVersion());
+		}
+		replacements.put("%version", server.getVersion());
+		replacements.put("%ip", "127.0.0.1");
+		replacements.put("%hostname", "localhost");
+		
+		String onlinePlayers = "";
+		Player[] players = server.getOnlinePlayers();
+		for (int i=0; i<players.length; i++) {
+			onlinePlayers += players[i].getDisplayName();
+			if (i+1 < players.length) {
+				onlinePlayers += ", ";
+			}
+		}
+		
+		replacements.put("%players", onlinePlayers);
+		
+		try {
+		    InetAddress addr = InetAddress.getLocalHost();
+		    replacements.put("%ip", addr.getHostAddress());
+		    replacements.put("%hostname", addr.getCanonicalHostName());
+		} catch (UnknownHostException e) {}
+		
 		return replacements;
 	}
 }
