@@ -41,7 +41,6 @@ public class Message {
 			String key = itr.next();
 			String value = replacements.get(key);
 			tmp = tmp.replace(key, value);
-			log.info(key + "->" + value);
 		}
 		return tmp;
 	}

@@ -89,7 +89,6 @@ public abstract class DataSource {
 	protected static boolean isDisabled(Type type, Messages.Type messageType) {
 		ArrayList<String> dis = disabled.get(type);
 		if (dis != null) {
-			log.info(messageType.toString().toLowerCase());
 			if (dis.contains(messageType.toString().toLowerCase())) {
 				return true;
 			} else {
