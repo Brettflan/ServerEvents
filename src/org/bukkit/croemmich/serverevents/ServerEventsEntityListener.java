@@ -20,16 +20,7 @@ public class ServerEventsEntityListener extends EntityListener {
 	ServerEventsEntityListener(ServerEvents plugin) {
 		//this.plugin = plugin;
 	}
-	@Override
-	public void onEntityDamageByEntity (EntityDamageByEntityEvent event){
-		onEntityDamage(event);
-	}
-	
-	@Override
-	public void onEntityDamageByBlock (EntityDamageByBlockEvent event){
-		onEntityDamage(event);
-	}
-	
+
 	@Override
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
@@ -39,12 +30,7 @@ public class ServerEventsEntityListener extends EntityListener {
 			onEntityDeath(event);
 		}
 	}
-	
-	@Override
-	public void onEntityDamageByProjectile(EntityDamageByProjectileEvent event) {
-		onEntityDamage(event);
-	}
-	
+
 	public void onEntityDeath (EntityDamageEvent event) {
 		if(event.isCancelled() == true || !(event.getEntity() instanceof Player)) return;
 		Player player = (Player) event.getEntity();

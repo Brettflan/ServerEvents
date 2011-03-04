@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 
+import org.bukkit.ChatColor;
+
 public class DataSourceFile extends DataSource {
 
 	protected static String uri;
@@ -53,7 +55,7 @@ public class DataSourceFile extends DataSource {
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(new File(uri)));
 				String line = "";
-				StringBuilder toSave = new StringBuilder(msg+"\r\n");
+				StringBuilder toSave = new StringBuilder(ChatColor.stripColor(msg)+"\r\n");
 				int n = 1;
 				while ((line = reader.readLine()) != null && n < keep_old) {
 					toSave.append(line+"\r\n");

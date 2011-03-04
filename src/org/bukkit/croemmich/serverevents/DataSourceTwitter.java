@@ -9,6 +9,8 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+import org.bukkit.ChatColor;
+
 public class DataSourceTwitter extends DataSource {
 
 	protected static int rate_limit = 350;
@@ -44,7 +46,7 @@ public class DataSourceTwitter extends DataSource {
 	@Override
 	protected void displayMessage(Messages.Type type, String msg) {
 		if (!DataSource.isDisabled(Type.TWITTER, type)) {
-			twitterQueue.add(msg);
+			twitterQueue.add(ChatColor.stripColor(msg));
 			if (twitterThread == null) {
 				twitterThread = new TwitterDisplayThread();
 			} 

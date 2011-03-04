@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Logger;
+import org.bukkit.ChatColor;
 
 public abstract class DataSource {
 	
@@ -73,7 +74,7 @@ public abstract class DataSource {
 			while (itr.hasNext()) {
     			itr.next().displayMessage(type, msg);
     		}
-			log.info("ServerEvents: " + msg);
+			log.info("ServerEvents: " + ChatColor.stripColor(msg));
 		}
 	}
 	

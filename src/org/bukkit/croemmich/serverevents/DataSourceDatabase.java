@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
+
 public class DataSourceDatabase extends DataSource {
 	
 	protected static final Logger log 		   = Logger.getLogger("Minecraft");
@@ -39,7 +41,7 @@ public class DataSourceDatabase extends DataSource {
 	@Override
 	protected void displayMessage(Messages.Type type, String msg) {
 		if (!DataSource.isDisabled(Type.DATABASE, type)) {
-			execute(sqlInsert,msg);
+			execute(sqlInsert,ChatColor.stripColor(msg));
 		}
 	}
 	

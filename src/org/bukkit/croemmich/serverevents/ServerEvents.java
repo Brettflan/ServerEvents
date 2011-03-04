@@ -7,8 +7,6 @@ import org.bukkit.Server;
 import org.bukkit.croemmich.serverevents.Messages.Type;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -22,19 +20,14 @@ public class ServerEvents extends JavaPlugin {
 	protected ServerEventsPlayerListener pl   = new ServerEventsPlayerListener(this);
 	protected ServerEventsEntityListener el   = new ServerEventsEntityListener(this);
     
-    public final String name               = getDescription().getName();
-    public final String version            = getDescription().getVersion();
+    public String name;
+    public String version;
     public static final String directory   = "plugins" + File.separatorChar + "ServerEvents" + File.separatorChar;
     public static final String configFile  = directory + "server_events.xml";
     
     public static Server server;
     
     private RandomMessageThread randomMessageThread;
-    
-    public ServerEvents(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader) {
-        super(pluginLoader, instance, desc, folder, plugin, cLoader);
-        server = this.getServer();
-    }
 
     @Override
     public void onDisable() {
@@ -48,11 +41,14 @@ public class ServerEvents extends JavaPlugin {
     		DataSource.display(Type.STOP, msg.getMessage());
     	}
     	
-		log.info(name + " " + version + " disabled");
+		log.info(getDescription().getName() + " " + getDescription().getVersion() + " disabled");
     }
 
     @Override
     public void onEnable() {
+		server = this.getServer();
+		name = getDescription().getName();
+		version = getDescription().getVersion();
     	File confdir = new File("ServerEvents"); 
     	if (confdir.exists()) {
     		File newdir = new File(directory);
@@ -102,9 +98,6 @@ public class ServerEvents extends JavaPlugin {
     	if (Messages.hasMessages(Messages.Type.DEATH)) {
     		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DEATH, el, Priority.Monitor, this);
     		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DAMAGED, el, Priority.Monitor, this);
-    		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DAMAGEDBY_BLOCK, el, Priority.Monitor, this);
-    		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DAMAGEDBY_ENTITY, el, Priority.Monitor, this);
-    		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DAMAGEDBY_PROJECTILE, el, Priority.Monitor, this);
     	}
     	
     	if (Messages.hasMessages(Messages.Type.BAN)){
