@@ -90,14 +90,14 @@ public class ServerEvents extends JavaPlugin {
     		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.Monitor, this);
     	
     	if (Messages.hasMessages(Messages.Type.COMMAND))
-    		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_COMMAND, pl, Priority.Monitor, this);
+    		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Priority.Monitor, this);
     		
     	if (Messages.hasMessages(Messages.Type.QUIT))
     		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, pl, Priority.Monitor, this);
     			
     	if (Messages.hasMessages(Messages.Type.DEATH)) {
     		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DEATH, el, Priority.Monitor, this);
-    		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DAMAGED, el, Priority.Monitor, this);
+    		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DAMAGE, el, Priority.Monitor, this);
     	}
     	
     	if (Messages.hasMessages(Messages.Type.BAN)){

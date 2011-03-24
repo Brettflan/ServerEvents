@@ -35,7 +35,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     }
     
     @Override
-    public void onPlayerCommand(PlayerChatEvent event) {
+    public void onPlayerCommandPreprocess(PlayerChatEvent event) {
     	String command = event.getMessage();
     	
     	Message msg = Messages.getRandomCommandMessage(command);
