@@ -3,8 +3,9 @@ package org.bukkit.croemmich.serverevents;
 import java.util.HashMap;
 
 import org.bukkit.croemmich.serverevents.Messages.Type;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerListener;
 
 public class ServerEventsPlayerListener extends PlayerListener {
@@ -15,7 +16,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     }
     
     @Override
-    public void onPlayerJoin(PlayerEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
     	Message msg = Messages.getRandomMessage(Messages.Type.JOIN);
     	if (msg != null) {
     		DataSource.display(Type.JOIN, msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
@@ -23,7 +24,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     }
 
     @Override
-    public void onPlayerQuit(PlayerEvent event) {
+    public void onPlayerQuit(PlayerQuitEvent event) {
     	Message msg = Messages.getRandomMessage(Messages.Type.QUIT);
     	if (msg != null) {
     		DataSource.display(Type.QUIT, msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
@@ -35,7 +36,7 @@ public class ServerEventsPlayerListener extends PlayerListener {
     }
     
     @Override
-    public void onPlayerCommandPreprocess(PlayerChatEvent event) {
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
     	String command = event.getMessage();
     	
     	Message msg = Messages.getRandomCommandMessage(command);
