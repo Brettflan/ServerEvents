@@ -66,8 +66,8 @@ public class DataSourceTwitter extends DataSource {
 			today = new Date();
 			output = formatter.format(today);
 			
-			if(msg.length() >= 140-output.length()+1) {
-				msg = msg.substring(0, 140-output.length()+1);
+			if(msg.length() >= 140-(output.length()+1)) {
+				msg = msg.substring(0, 140-(output.length()+1));
 			}
 			
 			msg += " " + output;
