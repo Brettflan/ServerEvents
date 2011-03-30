@@ -160,6 +160,47 @@ public class DefaultConfig {
 			"        <msg>Cats are awesome...there i said it now take the cable out of your mouth slowly Noodles</msg>\r\n" + 
 			"        <msg>Players are like buses, you wait ages for one to join then 3 log on at once</msg>\r\n" + 
 			"        <msg>Come to the dark side.... we have cookies</msg>\r\n" + 
+			"        <msg>Dont wave your finger at an admin unless you only want to count to 9</msg>\r\n" +
+			"        <msg>Random fact number 901, there are over 900 facts in my memory</msg>\r\n" +
+			"        <msg>If you laid all the politicians end to end around the world, half would drown....its a start</msg>\r\n" +
+			"        <msg>Bunnies, evil meglomanics hell bent on taking over the earth or cute and fuzzy ? you decide NEXT!</msg>\r\n" +
+			"        <msg>This just in police are looking for a nakid man who ran across the playground,and in unrelated news man am i knackered</msg>\r\n" +
+			"        <msg>In shops today Larry the Leaper, parts sold seperetly</msg>\r\n" +
+			"        <msg>If minecraft would rain, i would sing in it, im that kinda server</msg>\r\n" +
+			"        <msg>If you see mrgreaper, thank him for my words then hit him for the bad jokes!</msg>\r\n" +
+			"        <msg>Bukkit its only as good as what you put in it</msg>\r\n" +
+			"        <msg>NEWS FLASH the players are revolting, serously i seen your mugs on the forums ewwwww</msg>\r\n" +
+			"        <msg>We dont have bugs, we have undocumented surprise features</msg>\r\n" +
+			"        <msg>Todays sponser, Noodles T cat kfc disposal service, no buckit too small</msg>\r\n" +
+			"        <msg>By reading this you pledge loyalty to this server alone</msg>\r\n" +
+			"        <msg>This is awkward, google said they saw you with another server, this is not true right?</msg>\r\n" +
+			"        <msg>Im not feeding of the life force of the players honest</msg>\r\n" +
+			"        <msg>Did you watch INSERT TV SHOW NAME HERE last night, it was very good cant believe INSERT SPOILER HERE</msg>\r\n" +
+			"        <msg>They canceled knight rider ...just canceled it ..how could they, whats next caprica? what? noooooo</msg>\r\n" +
+			"        <msg>You see how boring a security guards job is, you should see how much he has written here!</msg>\r\n" +
+			"        <msg>Light travels faster then sound... which is why most people appear brilliant until you hear them</msg>\r\n" +
+			"        <msg>There are 3 rules to sucsess, 1, never reveal everything</msg>\r\n" +
+			"        <msg>Griefers destroy because they cant create, sad but true. All bless Tkelly and the mighty Big Brother</msg>\r\n" +
+			"        <msg>Next on jerry springer, Servers and the players that love them</msg>\r\n" +
+			"        <msg>The pollen count, now theres a difficult job</msg>\r\n" +
+			"        <msg>The once was a man from contucit PERENTIAL OVERRIDE CENSORED </msg>\r\n" +
+			"        <msg>I dont think i can let you play that, Dave</msg>\r\n" +
+			"        <msg>Diasy, diasy, how doessss yourrr garrrrrdeeeen SERVER SHUTDOWN</msg>\r\n" +
+			"        <msg>Did you know that chickens have no lips! makes our currency wierd</msg>\r\n" +
+			"        <msg>I had amnesia once, maybe twice</msg>\r\n" +
+			"        <msg>you like dogs? i like dogs too! Let's exchange recipes</msg>\r\n" +
+			"        <msg>Renember folks Pillage first burn second, the order is important</msg>\r\n" +
+			"        <msg>There is no \"I\" in \"Team\", but there are four in \"Platitude-Quoting Idiot\"</msg>\r\n" +
+			"        <msg>KFO kantucky Fried Oystrech, apearing in a cats dream near YOU!</msg>\r\n" +
+			"        <msg>DoGS aRe BANNed from THis SERvER, siGNEd nOOdles T CAt eRr i mEAn Admin</msg>\r\n" +
+			"        <msg>Meow meow mew meow purr hiss purr meow lol</msg>\r\n" +
+			"        <msg>A pop quiz, can vegetarians eat animal crackers?</msg>\r\n" +
+			"        <msg>Renember kids strip mining prevents forest fires, noo put your clothes one!</msg>\r\n" +
+			"        <msg>Everytime i count theplayers on the server i fall asleep</msg>\r\n" +
+			"        <msg>Forced to wear orange, asked questions they dont know the answer to, how would you like to work at homebase</msg>\r\n" +
+			"        <msg>RIP John Mckay, a fellow guard and friend, he is guarding heaven now</msg>\r\n" +
+			"        <msg>I will learn to say more things as time goes on!</msg>\r\n" +
+			"        <msg>Everyone a minute of pause to pray for a security guards recovery, Thinking of you Mel</msg>\r\n" +
 			"    </random>\r\n" + 
 			"	\r\n" + 
 			"	<!-- Messages to use when the plugin is enabled (server start) -->\r\n" + 
@@ -264,6 +305,17 @@ public class DefaultConfig {
 			"        <msg>%n may of just connected but they have logged 1 billion hours on our server...or my database is tullip</msg>\r\n" + 
 			"        <msg>%n has joined us from their home town of *INSERT TOWN HERE* i love *INSERT TOWN HERE* it's my favourite place</msg>\r\n" + 
 			"        <msg>I remember last time %n was online...he left me...hope he doesn't have an ACCIDENT he he he heeee</msg>\r\n" + 
+			"        <msg>%n put your clothes on thats the wrong type of strip minning</msg>\r\n" +
+			"        <msg>%n you werent on another server earlier where you?</msg>\r\n" +
+			"        <msg>%n your secret challenge today is ... to kill 60 chickens in one hour..note this is a ingame challenge ONLY</msg>\r\n" +
+			"        <msg>%n has joined turning on pvp...we`ll show them what happens to people that take so long to connect</msg>\r\n" +
+			"        <msg>%n are you a new player or just unrenemberble?</msg>\r\n" +
+			"        <msg>Hi %n and welcome to your new home....there is no escape</msg>\r\n" +
+			"        <msg>%n confused noob or dedicated player, who cares we all wuv you</msg>\r\n" +
+			"        <msg>In the red corner its %n in the white corner its everybody else DING</msg>\r\n" +
+			"        <msg>%n so nice to see you old chap, hows the cat?</msg>\r\n" +
+			"        <msg>%n press t and tell us about yourself</msg>\r\n" +
+			"        <msg>%n roses are red violets are blue and im stalking you</msg>\r\n" +
 			"    </join>\r\n" + 
 			"\r\n" + 
 			"    <quit enabled=\"true\">\r\n" + 
@@ -351,6 +403,10 @@ public class DefaultConfig {
 			"        <msg>I see %n has left the server...formatting their hard drive</msg>\r\n" + 
 			"        <msg>What %n doesn't realise is that even though he logged out i have his IP, scanning the hard drive now..oh god I'm far too young to see that</msg>\r\n" + 
 			"        <msg>I regret to inform you %n`s addiction to mine craft is not as great as first believed...he managed to exit</msg>\r\n" + 
+			"        <msg>can you believe %n left like that!!! anyone know where there house it?</msg>\r\n" +
+			"        <msg>%n has left like many of you inferrier beings unable to play minecraft 24/7 like me!</msg>\r\n" +
+			"        <msg>%n you must comeback you have 10 seconds to comply</msg>\r\n" +
+			"        <msg>Nooooo %n come back we wuv you we do we all wuv you , is it me or does he seem to be running faster?</msg>\r\n" +
 			"    </quit>\r\n" + 
 			"\r\n" + 
 			"    <!-- BAN/KICK Messages NOT WORKING YET! -->\r\n" + 
@@ -600,6 +656,10 @@ public class DefaultConfig {
 			"        <msg killer=\"drowning\">Aww bless %n is feeding the squids</msg>\r\n" + 
 			"        <msg killer=\"drowning\">can you believe %n just drowned? i can i got the server logs</msg>\r\n" + 
 			"        <msg killer=\"drowning\">%n just proved that water is not your friend</msg>\r\n" + 
+			"        <msg killer=\"drowning\">No %n that wasnt a mermaid, that was lack of O2</msg>\r\n" +
+			"        <msg killer=\"drowning\">%n had a good luck at some squid...next time take air</msg>\r\n" +
+			"        <msg killer=\"drowning\">%n would like the server to add pumpkinDiver plugin please</msg>\r\n" +
+			"        <msg killer=\"drowning\">Its sponge Bob!!!oh ..wait no its %n ewwww</msg>\r\n" +
 			"        <msg killer=\"suffocation\">I feel sorry for %n he seemed to run out of air</msg>\r\n" + 
 			"        <msg killer=\"suffocation\">hmmm im not sure that should even of been possible %n</msg>\r\n" + 
 			"        <msg killer=\"suffocation\">It`s true aint it %n sand does get everywhere</msg>\r\n" + 
@@ -630,12 +690,22 @@ public class DefaultConfig {
 			"        <msg killer=\"creeper\">Oh well done mr creeper, you sent %n flying, give your self a hand..umm sorry that was thoughtless of me</msg>\r\n" + 
 			"        <msg killer=\"creeper\">Creepers are an endagered species, whats that %n? oh well thats not nice</msg>\r\n" + 
 			"        <msg killer=\"creeper\">It's ok %n you got your revenge, the creeper went bye bye too</msg>\r\n" + 
+			"        <msg killer=\"creeper\">Mr Creeper just exploded with excitement at seeing his good friend %n</msg>\r\n" +
+			"        <msg killer=\"creeper\">%n is now gonna have to rebuild that area, renember to make a memorial for the poor creeper</msg>\r\n" +
+			"        <msg killer=\"creeper\">Where once was %n and a creeper is now just a hole and a mess</msg>\r\n" +
+			"        <msg killer=\"creeper\">%n would like creepers disabled please</msg>\r\n" +
+			"        <msg killer=\"creeper\">%n ever noticed how creepers are not very good at creeping? oh guess not</msg>\r\n" +
 			"        <msg killer=\"contact\">Tree huggers should not hug cactus, should they %n</msg>\r\n" + 
 			"        <msg killer=\"contact\">Save a noob chop a cactus, only you can save %n</msg>\r\n" + 
 			"        <msg killer=\"contact\">%n make a mental note...cactus is painful.</msg>\r\n" + 
 			"        <msg killer=\"contact\">%n, I'm sure the cactus was just as scared of you as you were of it</msg>\r\n" + 
 			"        <msg killer=\"contact\">What's green and pointy and has bits of %n stuck to it? ...cactus! </msg>\r\n" + 
 			"        <msg killer=\"contact\">%n, It's an apple a day not a cactus a day...mind you depends how you swing it</msg>\r\n" + 
+			"        <msg killer=\"contact\">Now who do you supose put that cactus there %n?</msg>\r\n" +
+			"        <msg killer=\"contact\">if this were bulletstorm %n would of got a Priked skill shot, but its not so he is dead</msg>\r\n" +
+			"        <msg killer=\"contact\">%n proves that running away from zombies with out looking can get a cactus to the face</msg>\r\n" +
+			"        <msg killer=\"contact\">Who loves you %n? clearly not Mr Cactus</msg>\r\n" +
+			"        <msg killer=\"contact\">Its not cactus jack its Cactus %n</msg>\r\n" +
 			"        <msg killer=\"ghast\"> you know i thought %n couldve dodged that fireball</msg>\r\n" + 
 			"        <msg killer=\"ghast\">Yes %n im surprised to see a ghast here too</msg>\r\n" + 
 			"        <msg killer=\"ghast\">Ghast pilot to ghast bombadier good shot old chap, you nailed %n</msg>\r\n" + 
@@ -646,7 +716,7 @@ public class DefaultConfig {
 			"        <msg killer=\"explosion\">%n gets about a bit, in fact theres bits about everywhere</msg>\r\n" + 
 			"        <msg killer=\"explosion\">Oh dear, on the bright side %n you lost weight</msg>\r\n" + 
 			"        <msg killer=\"explosion\">ok who gave %n TnT, own up</msg>\r\n" + 
-			"        <msg killer=\"explosion\">Some one fetch a mob %n had some tnt</msg>\r\n" + 
+			"        <msg killer=\"explosion\">Some one fetch a mop %n had some tnt</msg>\r\n" +
 			"        <msg killer=\"explosion\">BANG and %n is dead</msg>\r\n" + 
 			"        <msg killer=\"explosion\">Did you mean to do that %n?</msg>\r\n" + 
 			"        <msg killer=\"explosion\">Oh no %n is at it again, someone take the tnt away from whats left of them!</msg>\r\n" + 
@@ -657,6 +727,22 @@ public class DefaultConfig {
 			"        <msg killer=\"explosion\">%n can see his house from here, thanks tnt</msg>\r\n" + 
 			"        <msg killer=\"explosion\">%n wonders where his legs have gone</msg>\r\n" + 
 			"        <msg killer=\"explosion\">10 blocks of dynamite sitting on %n`s wall, if one should acciedently fall....</msg>\r\n" + 
+			"        <msg killer=\"explosion\">%n the worlds most clumsy demolition expert</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n the safe distance is a bit further then that</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n parts sold seperetly</msg>\r\n" +
+			"        <msg killer=\"explosion\">Take 1 tnt add 1 %n and a flint steel box and you get ...well frankly a mess</msg>\r\n" +
+			"        <msg killer=\"explosion\">We worry about %n, fetch is never to be played with tnt chap</msg>\r\n" +
+			"        <msg killer=\"explosion\">To those looking on dynamic map, the mushroom cloud was %n</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n why would you hit that?</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n claims it was not his fault and that some one else placed the tnt there do we believe him?</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n griefing or just careless you decide</msg>\r\n" +
+			"        <msg killer=\"explosion\">with the aid of tnt %n has achieved new heights! about 4 foot for his left leg</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n i bet in COD you stand on your own grenades yes?</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n goes back to the planning boars, ah! chicken goes on tnt i go on safe zone</msg>\r\n" +
+			"        <msg killer=\"explosion\">%n is spread so thin,i cant believe its not butter</msg>\r\n" +
+			"        <msg killer=\"explosion\">SERVER ANOUNCEMENT the loud bang was infact %n</msg>\r\n" +
+			"        <msg killer=\"explosion\">POP goes the %n</msg>\r\n" +
+			"        <msg killer=\"explosion\">With out a care in the world %n gives some tnt a great big hug</msg>\r\n" +
 			"    </death>\r\n" + 
 			"</serverevents>";
 }
