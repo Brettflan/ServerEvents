@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.wimbli.serverevents.Messages.Type;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
@@ -81,7 +83,19 @@ public class DeathThread implements Runnable {
     			case BLOCK_EXPLOSION: type = DeathType.EXPLOSION; break;
     			case CONTACT: type = DeathType.CONTACT; break;
     			case DROWNING: type = DeathType.DROWNING; break;
-    			case ENTITY_EXPLOSION: type = DeathType.CREEPER; type2 = DeathType.CREATURE; break;
+    			case ENTITY_EXPLOSION:
+    				damager = ((EntityDamageByEntityEvent)event).getDamager();
+					if (damager instanceof Creeper)
+					{
+						type = DeathType.CREEPER;
+						type2 = DeathType.CREATURE;
+					}
+					else if (damager instanceof Fireball)
+					{
+						type = DeathType.GHAST;
+						type2 = DeathType.CREATURE;
+					}
+					break;
     			case FALL: type = DeathType.FALLING; break;
     			case FIRE:
     			case FIRE_TICK: type = DeathType.BURNING; break;
