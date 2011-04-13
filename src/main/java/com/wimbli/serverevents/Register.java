@@ -21,9 +21,9 @@ import java.io.InputStreamReader;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
-import twitter4j.http.AccessToken;
-import twitter4j.http.RequestToken;
 
 /**
  * Example application that uses OAuth method to acquire access to your account.<br>
@@ -37,21 +37,21 @@ public final class Register {
      *
      * @param args message
      */
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         try {
-        	ConfigurationBuilder cb = new ConfigurationBuilder();
-        	cb.setDebugEnabled(true)
-        	  .setOAuthConsumerKey("QyuUqx8UFaRLMWORQinphg")
-        	  .setOAuthConsumerSecret("EWORHYNo3JkJgvihiGwFL8tWNHExyhWFilR1Q");
-        	
-        	
+            ConfigurationBuilder cb = new ConfigurationBuilder();
+            cb.setDebugEnabled(true)
+              .setOAuthConsumerKey("QyuUqx8UFaRLMWORQinphg")
+              .setOAuthConsumerSecret("EWORHYNo3JkJgvihiGwFL8tWNHExyhWFilR1Q");
+
+
             Twitter twitter = new TwitterFactory(cb.build()).getInstance();
             AccessToken accessToken = null;
             try {
                 // get request token.
                 // this will throw IllegalStateException if access token is already available
                 RequestToken requestToken = twitter.getOAuthRequestToken();
-                
+
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 while (null == accessToken) {
@@ -82,7 +82,7 @@ public final class Register {
                 }
             }
             System.out.println("Successfully connected to Twitter.");
-            
+
             System.out.println("\n\n*********************");
             System.out.println("***** IMPORTANT *****");
             System.out.println("**************************************************************");
@@ -90,7 +90,7 @@ public final class Register {
             System.out.println("accessToken=\"" + accessToken.getToken()+"\"");
             System.out.println("accessTokenSecret=\"" + accessToken.getTokenSecret()+"\"");
             System.out.println("**************************************************************");
-            
+
             System.out.println("Restart the minecraft server now.");
             System.exit(0);
         } catch (TwitterException te) {
