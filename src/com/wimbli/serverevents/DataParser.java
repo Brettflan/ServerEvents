@@ -187,8 +187,19 @@ public class DataParser {
 					} catch (Exception e) {
 						log.warning(ServerEvents.configFile + ": 'conf.twitter.rate_limit' must an integer greater than 0");
 					}
+					int hourOffset = 0;
+					String ts_offset = attributes.getValue("timestamp_hour_offset");
+					try {
+						hourOffset = Integer.parseInt(ts_offset);
+						if (hourOffset < -24 || hourOffset > 24) {
+							hourOffset = 0;
+							log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' must an integer between -24 and 24");
+						}
+					} catch (Exception e) {
+						log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' must an integer between -24 and 24");
+					}
 
-					DataSource.addTwitterDataSource(attributes.getValue("accessToken"), attributes.getValue("accessTokenSecret"), rate);
+					DataSource.addTwitterDataSource(attributes.getValue("accessToken"), attributes.getValue("accessTokenSecret"), rate, hourOffset);
 				}
 			} else if (qName.equalsIgnoreCase("database")) {
 				database = true;

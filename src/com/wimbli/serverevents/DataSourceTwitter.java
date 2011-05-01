@@ -14,6 +14,7 @@ import org.bukkit.ChatColor;
 public class DataSourceTwitter extends DataSource {
 
 	protected static int rate_limit = 350;
+	protected static int hour_offset = 0;
 	protected static String accessToken = "";
 	protected static String accessTokenSecret = "";
 	
@@ -22,10 +23,11 @@ public class DataSourceTwitter extends DataSource {
 	
 	private static TwitterFactory tf;
 	
-	protected DataSourceTwitter(String accessToken, String accessTokenSecret, int rate_limit) {
+	protected DataSourceTwitter(String accessToken, String accessTokenSecret, int rate_limit, int hour_offset) {
 		DataSourceTwitter.accessToken = accessToken;
 		DataSourceTwitter.accessTokenSecret = accessTokenSecret;
 		DataSourceTwitter.rate_limit = rate_limit;
+		DataSourceTwitter.hour_offset = hour_offset;
 		
 		if (accessToken.equalsIgnoreCase("{accessToken}") || accessTokenSecret.equalsIgnoreCase("{accessTokenSecret}")) {
 			log.warning("*******************************************");
@@ -64,6 +66,11 @@ public class DataSourceTwitter extends DataSource {
 
 			formatter = new SimpleDateFormat("hh:mm:ss z");
 			today = new Date();
+			if (hour_offset != 0)
+			{	// 3600000 milliseconds = 1 hour
+				long offset_time = today.getTime() + (hour_offset * 3600000);
+				today.setTime(offset_time);
+			}
 			output = formatter.format(today);
 			
 			if(msg.length() >= 140-(output.length()+1)) {
