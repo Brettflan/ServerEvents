@@ -17,8 +17,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 */
 public class ServerEvents extends JavaPlugin {
 	protected static final Logger log      = Logger.getLogger("Minecraft");
-	protected ServerEventsPlayerListener pl   = new ServerEventsPlayerListener(this);
-	protected ServerEventsEntityListener el   = new ServerEventsEntityListener(this);
+	protected ServerEventsPlayerListener pl   = new ServerEventsPlayerListener();
+	protected ServerEventsEntityListener el   = new ServerEventsEntityListener();
     
     public String name;
     public String version;

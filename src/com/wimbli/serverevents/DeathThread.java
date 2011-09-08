@@ -10,6 +10,7 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
@@ -56,9 +57,16 @@ public class DeathThread implements Runnable {
     		DeathType type = DeathType.UNKNOWN;
     		DeathType type2 = DeathType.UNKNOWN;
     		switch (event.getCause()) {
+				case PROJECTILE:
     			case ENTITY_ATTACK: 
     				damager = ((EntityDamageByEntityEvent)event).getDamager();
-    				if (damager instanceof Player) {
+
+					// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
+					if (damager instanceof Projectile) {
+						damager = ((Projectile)damager).getShooter();
+					}
+
+					if (damager instanceof Player) {
     					type = DeathType.PLAYER;
     				} else if (damager instanceof Zombie) {
     					type = DeathType.ZOMBIE;

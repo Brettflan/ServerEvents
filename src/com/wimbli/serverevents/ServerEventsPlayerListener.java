@@ -9,12 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerListener;
 
 public class ServerEventsPlayerListener extends PlayerListener {
-    //private final ServerEvents plugin;
 
-    public ServerEventsPlayerListener(ServerEvents instance) {
-       // plugin = instance;
-    }
-    
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
     	Message msg = Messages.getRandomMessage(Messages.Type.JOIN);

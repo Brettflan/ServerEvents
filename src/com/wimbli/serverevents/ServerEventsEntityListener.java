@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByBlockEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageByProjectileEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityListener;
 
@@ -15,11 +12,6 @@ public class ServerEventsEntityListener extends EntityListener {
 	
 	protected static ArrayList<String> threads = new ArrayList<String>();
 	protected static HashMap<String, Long> lastDeath = new HashMap<String, Long>();
-	
-	//private final ServerEvents plugin;
-	ServerEventsEntityListener(ServerEvents plugin) {
-		//this.plugin = plugin;
-	}
 
 	@Override
 	public void onEntityDamage(EntityDamageEvent event) {
