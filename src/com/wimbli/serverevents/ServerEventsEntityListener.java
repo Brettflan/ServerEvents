@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 
 public class ServerEventsEntityListener extends EntityListener {
@@ -14,21 +15,20 @@ public class ServerEventsEntityListener extends EntityListener {
 	protected static HashMap<String, Long> lastDeath = new HashMap<String, Long>();
 
 	@Override
-	public void onEntityDamage(EntityDamageEvent event) {
-		if (!(event.getEntity() instanceof Player)) return;
-		
-		Player damaged = (Player) event.getEntity();
-		if (!event.isCancelled() &&  event.getDamage() >= damaged.getHealth()){
-			onEntityDeath(event);
-		}
-	}
+	public void onEntityDeath(EntityDeathEvent event) {
+		if(!(event instanceof PlayerDeathEvent))
+			return;
 
-	public void onEntityDeath (EntityDamageEvent event) {
-		if(event.isCancelled() == true || !(event.getEntity() instanceof Player)) return;
+		if (DataSource.disableDefaultDeathMessages) {
+			PlayerDeathEvent death = (PlayerDeathEvent) event;
+			death.setDeathMessage(null);
+		}
+
 		Player player = (Player) event.getEntity();
+
 		if (!threads.contains(player.getName())) {
 			threads.add(player.getName());
-			new DeathThread(player, event).start();
+			new DeathThread(player, player.getLastDamageCause()).start();
 		}
 	}
 }

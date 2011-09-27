@@ -17,6 +17,7 @@ public abstract class DataSource {
 	protected static HashMap<Type, ArrayList<String>> disabled = new HashMap<Type, ArrayList<String>>();
 	
 	protected static boolean enableQueue = true;
+	protected static boolean disableDefaultDeathMessages = true;
 	protected static int mpm = 12;
 	protected static int hold = 10;
 	

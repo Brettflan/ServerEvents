@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.wimbli.serverevents.Messages.Type;
+import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
@@ -66,7 +69,9 @@ public class DeathThread implements Runnable {
 						damager = ((Projectile)damager).getShooter();
 					}
 
-					if (damager instanceof Player) {
+					if (damager == null) {
+    					type = DeathType.ORPHAN;
+					} else if (damager instanceof Player) {
     					type = DeathType.PLAYER;
     				} else if (damager instanceof Zombie) {
     					type = DeathType.ZOMBIE;
@@ -77,8 +82,17 @@ public class DeathThread implements Runnable {
     				} else if (damager instanceof Spider) {
     					type = DeathType.SPIDER;
     					type2 = DeathType.CREATURE;
+    				} else if (damager instanceof CaveSpider) {
+    					type = DeathType.CAVESPIDER;
+    					type2 = DeathType.CREATURE;
+    				} else if (damager instanceof Enderman) {
+    					type = DeathType.ENDERMAN;
+    					type2 = DeathType.CREATURE;
     				} else if (damager instanceof Slime) {
     					type = DeathType.SLIME;
+    					type2 = DeathType.CREATURE;
+    				} else if (damager instanceof Silverfish) {
+    					type = DeathType.SILVERFISH;
     					type2 = DeathType.CREATURE;
     				} else if (damager instanceof PigZombie) {
     					type = DeathType.PIGZOMBIE;
@@ -109,6 +123,7 @@ public class DeathThread implements Runnable {
     			case FIRE_TICK: type = DeathType.BURNING; break;
     			case LAVA: type = DeathType.LAVA; break;
     			case SUFFOCATION: type = DeathType.SUFFOCATION; break;
+    			case STARVATION: type = DeathType.STARVATION; break;
     		}
     		Message msg = Messages.getRandomDeathMessage(type, type2);
         	

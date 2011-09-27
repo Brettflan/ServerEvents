@@ -38,6 +38,8 @@ public class DefaultConfig {
 			"	<conf>\r\n" + 
 			"		<!--  Queueing ensures that messages are not displayed too quickly. -->\r\n" + 
 			"		<queue enabled=\"true\" messages_per_minute=\"12\" messages_to_hold=\"10\" />\r\n" + 
+			"		<!--  If for some reason you still want to see the default Minecraft death messages in addition to the ServerEvents ones, set this to false. -->\r\n" +
+			"		<preventDefaultMinecraftDeathMessages enabled=\"true\" />\r\n" +
 			"		<file enabled=\"false\" uri=\"ServerEvents"+File.separatorChar+"plugins"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
 			"		<!--  See https://github.com/Bukkit/Bukkit/blob/master/src/main/java/org/bukkit/ChatColor.java for colors. -->\r\n" + 
 			"		<chat enabled=\"true\" prefix=\"[ServerEvents] \" prefix_color=\"aqua\" color=\"white\" />\r\n" + 
@@ -743,6 +745,16 @@ public class DefaultConfig {
 			"        <msg killer=\"explosion\">SERVER ANOUNCEMENT the loud bang was infact %n</msg>\r\n" +
 			"        <msg killer=\"explosion\">POP goes the %n</msg>\r\n" +
 			"        <msg killer=\"explosion\">With out a care in the world %n gives some tnt a great big hug</msg>\r\n" +
+			"        <msg killer=\"starvation\">For only 10 cents a day, we could have saved poor %n from starvation</msg>\r\n" +
+			"        <msg killer=\"starvation\">%n was last seen trying to eat his own fingers</msg>\r\n" +
+			"        <msg killer=\"starvation\">Of all the ways to die in Minecraft, %n managed to starve to death. Bravo.</msg>\r\n" +
+			"        <msg killer=\"orphanprojectile\">Did anyone see what shot %n to death? A true mystery.</msg>\r\n" +
+			"        <msg killer=\"cavespider\">%n can now add arachnophobia to his list of ailments.</msg>\r\n" +
+			"        <msg killer=\"cavespider\">Cave Spiders are a bit of a pest, just ask %n.</msg>\r\n" +
+			"        <msg killer=\"enderman\">%n should have known better than to stare at that enderman.</msg>\r\n" +
+			"        <msg killer=\"enderman\">Jeepers, creepers, that enderman liked %n's peepers.</msg>\r\n" +
+			"        <msg killer=\"silverfish\">%n managed to find a silverfish! Unfortunately, it didn't like being disturbed.</msg>\r\n" +
+			"        <msg killer=\"silverfish\">That silverfish was just too hard for %n to hit.</msg>\r\n" +
 			"    </death>\r\n" + 
 			"</serverevents>";
 }

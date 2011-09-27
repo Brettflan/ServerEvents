@@ -9,7 +9,8 @@ public enum DeathType {
 	GHAST("ghast"), PIGZOMBIE("pigzombie"), SKELETON("skeleton"), SPIDER("spider"), 
 	CONTACT("contact"), EXPLOSION("explosion"), DROWNING("drowning"), FALLING("falling"), 
 	BURNING("burning"), LAVA("lava"), SUFFOCATION("suffocation"), GIANT("giant"), 
-	SLIME("slime"), UNKNOWN("unknown");
+	SLIME("slime"), UNKNOWN("unknown"), STARVATION("starvation"), ORPHAN("orphanprojectile"),
+	CAVESPIDER("cavespider"), ENDERMAN("enderman"), SILVERFISH("silverfish");
 
     private String name;
     

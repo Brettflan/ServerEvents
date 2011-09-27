@@ -110,6 +110,8 @@ public class DataParser {
 			if (qName.equalsIgnoreCase("conf")) {
 				conf = true;
 				enabled = true; // cant disable the conf
+			} else if (qName.equalsIgnoreCase("preventDefaultMinecraftDeathMessages")) {
+				DataSource.disableDefaultDeathMessages = enabled;
 			} else if (qName.equalsIgnoreCase("queue")) {
 				queue = true;
 				DataSource.enableQueue = enabled;
