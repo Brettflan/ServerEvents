@@ -191,14 +191,18 @@ public class DataParser {
 					}
 					int hourOffset = 0;
 					String ts_offset = attributes.getValue("timestamp_hour_offset");
-					try {
-						hourOffset = Integer.parseInt(ts_offset);
-						if (hourOffset < -24 || hourOffset > 24) {
-							hourOffset = 0;
+					if (ts_offset != null && !ts_offset.isEmpty()) {
+						try {
+							hourOffset = Integer.parseInt(ts_offset);
+							if (hourOffset < -24 || hourOffset > 24) {
+								hourOffset = 0;
+								log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' must an integer between -24 and 24");
+							}
+						} catch (Exception e) {
 							log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' must an integer between -24 and 24");
 						}
-					} catch (Exception e) {
-						log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' must an integer between -24 and 24");
+					} else {
+						log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' is not present in your config. No offset will be applied.");
 					}
 
 					DataSource.addTwitterDataSource(attributes.getValue("accessToken"), attributes.getValue("accessTokenSecret"), rate, hourOffset);
