@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.wimbli.serverevents.Register
+Class-Path: ../twitter4j-core.jar ../mysql-connector-java-bin.jar
+
