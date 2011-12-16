@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.wimbli.serverevents.Messages.Type;
+import org.bukkit.entity.Blaze;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -61,7 +63,8 @@ public class DeathThread implements Runnable {
     		DeathType type2 = DeathType.UNKNOWN;
     		switch (event.getCause()) {
 				case PROJECTILE:
-    			case ENTITY_ATTACK: 
+    			case ENTITY_EXPLOSION:
+    			case ENTITY_ATTACK:
     				damager = ((EntityDamageByEntityEvent)event).getDamager();
 
 					// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
@@ -88,6 +91,9 @@ public class DeathThread implements Runnable {
     				} else if (damager instanceof Enderman) {
     					type = DeathType.ENDERMAN;
     					type2 = DeathType.CREATURE;
+    				} else if (damager instanceof MagmaCube) {
+    					type = DeathType.MAGMACUBE;
+    					type2 = DeathType.CREATURE;
     				} else if (damager instanceof Slime) {
     					type = DeathType.SLIME;
     					type2 = DeathType.CREATURE;
@@ -100,24 +106,20 @@ public class DeathThread implements Runnable {
     				} else if (damager instanceof Ghast) {
     					type = DeathType.GHAST;
     					type2 = DeathType.CREATURE;
+					} else if (damager instanceof Creeper) {
+						type = DeathType.CREEPER;
+						type2 = DeathType.CREATURE;
+					} else if (damager instanceof Blaze) {
+    					type = DeathType.BLAZE;
+    					type2 = DeathType.CREATURE;
+    				} else if (damager instanceof EnderDragon) {
+    					type = DeathType.ENDERDRAGON;
+    					type2 = DeathType.CREATURE;
     				}
     				break;
     			case BLOCK_EXPLOSION: type = DeathType.EXPLOSION; break;
     			case CONTACT: type = DeathType.CONTACT; break;
     			case DROWNING: type = DeathType.DROWNING; break;
-    			case ENTITY_EXPLOSION:
-    				damager = ((EntityDamageByEntityEvent)event).getDamager();
-					if (damager instanceof Creeper)
-					{
-						type = DeathType.CREEPER;
-						type2 = DeathType.CREATURE;
-					}
-					else if (damager instanceof Fireball)
-					{
-						type = DeathType.GHAST;
-						type2 = DeathType.CREATURE;
-					}
-					break;
     			case FALL: type = DeathType.FALLING; break;
     			case FIRE:
     			case FIRE_TICK: type = DeathType.BURNING; break;

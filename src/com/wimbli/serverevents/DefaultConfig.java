@@ -708,9 +708,9 @@ public class DefaultConfig {
 			"        <msg killer=\"contact\">%n proves that running away from zombies with out looking can get a cactus to the face</msg>\r\n" +
 			"        <msg killer=\"contact\">Who loves you %n? clearly not Mr Cactus</msg>\r\n" +
 			"        <msg killer=\"contact\">Its not cactus jack its Cactus %n</msg>\r\n" +
-			"        <msg killer=\"ghast\"> you know i thought %n couldve dodged that fireball</msg>\r\n" + 
+			"        <msg killer=\"ghast\">I think %n could have dodged that fireball</msg>\r\n" + 
 			"        <msg killer=\"ghast\">Yes %n im surprised to see a ghast here too</msg>\r\n" + 
-			"        <msg killer=\"ghast\">Ghast pilot to ghast bombadier good shot old chap, you nailed %n</msg>\r\n" + 
+			"        <msg killer=\"ghast\">Ghast pilot to ghast bombadier: good shot old chap, you nailed %n</msg>\r\n" + 
 			"        <msg killer=\"explosion\">%n i think you were a bit to close to that TNT chap</msg>\r\n" + 
 			"        <msg killer=\"explosion\">%n now featured on youtube!! look up \"Idiot with TNT\"</msg>\r\n" + 
 			"        <msg killer=\"explosion\">you rocked the world %n !</msg>\r\n" + 
@@ -745,8 +745,8 @@ public class DefaultConfig {
 			"        <msg killer=\"explosion\">SERVER ANOUNCEMENT the loud bang was infact %n</msg>\r\n" +
 			"        <msg killer=\"explosion\">POP goes the %n</msg>\r\n" +
 			"        <msg killer=\"explosion\">With out a care in the world %n gives some tnt a great big hug</msg>\r\n" +
-			"        <msg killer=\"starvation\">For only 10 cents a day, we could have saved poor %n from starvation</msg>\r\n" +
-			"        <msg killer=\"starvation\">%n was last seen trying to eat his own fingers</msg>\r\n" +
+			"        <msg killer=\"starvation\">For only 10 cents a day, we could have saved poor %n from starvation.</msg>\r\n" +
+			"        <msg killer=\"starvation\">%n was last seen trying to eat his own fingers.</msg>\r\n" +
 			"        <msg killer=\"starvation\">Of all the ways to die in Minecraft, %n managed to starve to death. Bravo.</msg>\r\n" +
 			"        <msg killer=\"orphanprojectile\">Did anyone see what shot %n to death? A true mystery.</msg>\r\n" +
 			"        <msg killer=\"cavespider\">%n can now add arachnophobia to his list of ailments.</msg>\r\n" +
@@ -755,6 +755,14 @@ public class DefaultConfig {
 			"        <msg killer=\"enderman\">Jeepers, creepers, that enderman liked %n's peepers.</msg>\r\n" +
 			"        <msg killer=\"silverfish\">%n managed to find a silverfish! Unfortunately, it didn't like being disturbed.</msg>\r\n" +
 			"        <msg killer=\"silverfish\">That silverfish was just too hard for %n to hit.</msg>\r\n" +
+			"        <msg killer=\"slime\">It's uncommon enough to find a Slime, but %n even managed to be killed by one.</msg>\r\n" +
+			"        <msg killer=\"slime\">%n suffered death by goo. Slimes can be deadly, who knew?</msg>\r\n" +
+			"        <msg killer=\"blaze\">A Blaze burned %n to a crisp.</msg>\r\n" +
+			"        <msg killer=\"blaze\">%n didn't quite dodge enough Blaze fireballs.</msg>\r\n" +
+			"        <msg killer=\"magmacube\">A Magma Cube just squished %n.</msg>\r\n" +
+			"        <msg killer=\"magmacube\">The last thing %n saw was the underside of a Magma Cube.</msg>\r\n" +
+			"        <msg killer=\"enderdragon\">%n didn't impress that EnderDragon with his Dovahkiin impression.</msg>\r\n" +
+			"        <msg killer=\"enderdragon\">%n wasn't prepared to face that EnderDragon after all.</msg>\r\n" +
 			"    </death>\r\n" + 
 			"</serverevents>";
 }
