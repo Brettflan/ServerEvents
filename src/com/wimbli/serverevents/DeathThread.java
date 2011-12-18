@@ -61,72 +61,75 @@ public class DeathThread implements Runnable {
             Entity damager = null;
     		DeathType type = DeathType.UNKNOWN;
     		DeathType type2 = DeathType.UNKNOWN;
-    		switch (event.getCause()) {
-				case PROJECTILE:
-    			case ENTITY_EXPLOSION:
-    			case ENTITY_ATTACK:
-    				damager = ((EntityDamageByEntityEvent)event).getDamager();
+			if (event.getCause() != null)
+			{
+				switch (event.getCause()) {
+					case PROJECTILE:
+					case ENTITY_EXPLOSION:
+					case ENTITY_ATTACK:
+						damager = ((EntityDamageByEntityEvent)event).getDamager();
 
-					// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
-					if (damager instanceof Projectile) {
-						damager = ((Projectile)damager).getShooter();
-					}
+						// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
+						if (damager instanceof Projectile) {
+							damager = ((Projectile)damager).getShooter();
+						}
 
-					if (damager == null) {
-    					type = DeathType.ORPHAN;
-					} else if (damager instanceof Player) {
-    					type = DeathType.PLAYER;
-    				} else if (damager instanceof Zombie) {
-    					type = DeathType.ZOMBIE;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof Skeleton) {
-    					type = DeathType.SKELETON;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof Spider) {
-    					type = DeathType.SPIDER;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof CaveSpider) {
-    					type = DeathType.CAVESPIDER;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof Enderman) {
-    					type = DeathType.ENDERMAN;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof MagmaCube) {
-    					type = DeathType.MAGMACUBE;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof Slime) {
-    					type = DeathType.SLIME;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof Silverfish) {
-    					type = DeathType.SILVERFISH;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof PigZombie) {
-    					type = DeathType.PIGZOMBIE;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof Ghast) {
-    					type = DeathType.GHAST;
-    					type2 = DeathType.CREATURE;
-					} else if (damager instanceof Creeper) {
-						type = DeathType.CREEPER;
-						type2 = DeathType.CREATURE;
-					} else if (damager instanceof Blaze) {
-    					type = DeathType.BLAZE;
-    					type2 = DeathType.CREATURE;
-    				} else if (damager instanceof EnderDragon) {
-    					type = DeathType.ENDERDRAGON;
-    					type2 = DeathType.CREATURE;
-    				}
-    				break;
-    			case BLOCK_EXPLOSION: type = DeathType.EXPLOSION; break;
-    			case CONTACT: type = DeathType.CONTACT; break;
-    			case DROWNING: type = DeathType.DROWNING; break;
-    			case FALL: type = DeathType.FALLING; break;
-    			case FIRE:
-    			case FIRE_TICK: type = DeathType.BURNING; break;
-    			case LAVA: type = DeathType.LAVA; break;
-    			case SUFFOCATION: type = DeathType.SUFFOCATION; break;
-    			case STARVATION: type = DeathType.STARVATION; break;
-    		}
+						if (damager == null) {
+							type = DeathType.ORPHAN;
+						} else if (damager instanceof Player) {
+							type = DeathType.PLAYER;
+						} else if (damager instanceof Zombie) {
+							type = DeathType.ZOMBIE;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Skeleton) {
+							type = DeathType.SKELETON;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Spider) {
+							type = DeathType.SPIDER;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof CaveSpider) {
+							type = DeathType.CAVESPIDER;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Enderman) {
+							type = DeathType.ENDERMAN;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof MagmaCube) {
+							type = DeathType.MAGMACUBE;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Slime) {
+							type = DeathType.SLIME;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Silverfish) {
+							type = DeathType.SILVERFISH;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof PigZombie) {
+							type = DeathType.PIGZOMBIE;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Ghast) {
+							type = DeathType.GHAST;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Creeper) {
+							type = DeathType.CREEPER;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Blaze) {
+							type = DeathType.BLAZE;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof EnderDragon) {
+							type = DeathType.ENDERDRAGON;
+							type2 = DeathType.CREATURE;
+						}
+						break;
+					case BLOCK_EXPLOSION: type = DeathType.EXPLOSION; break;
+					case CONTACT: type = DeathType.CONTACT; break;
+					case DROWNING: type = DeathType.DROWNING; break;
+					case FALL: type = DeathType.FALLING; break;
+					case FIRE:
+					case FIRE_TICK: type = DeathType.BURNING; break;
+					case LAVA: type = DeathType.LAVA; break;
+					case SUFFOCATION: type = DeathType.SUFFOCATION; break;
+					case STARVATION: type = DeathType.STARVATION; break;
+				}
+			}
     		Message msg = Messages.getRandomDeathMessage(type, type2);
         	
     		if (msg != null) {
