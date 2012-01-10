@@ -13,6 +13,7 @@ import org.bukkit.ChatColor;
 
 public class DataSourceTwitter extends DataSource {
 
+	protected static boolean add_timestamp = false;
 	protected static int rate_limit = 350;
 	protected static int hour_offset = 0;
 	protected static String accessToken = "";
@@ -23,9 +24,10 @@ public class DataSourceTwitter extends DataSource {
 	
 	private static TwitterFactory tf;
 	
-	protected DataSourceTwitter(String accessToken, String accessTokenSecret, int rate_limit, int hour_offset) {
+	protected DataSourceTwitter(String accessToken, String accessTokenSecret, boolean add_timestamp, int rate_limit, int hour_offset) {
 		DataSourceTwitter.accessToken = accessToken;
 		DataSourceTwitter.accessTokenSecret = accessTokenSecret;
+		DataSourceTwitter.add_timestamp = add_timestamp;
 		DataSourceTwitter.rate_limit = rate_limit;
 		DataSourceTwitter.hour_offset = hour_offset;
 		
@@ -60,24 +62,26 @@ public class DataSourceTwitter extends DataSource {
 	
 	protected static void displayTwitterNow(String msg) {
 		if (msg != null) {
-			Date today;
-			String output;
-			SimpleDateFormat formatter;
+			String timestamp = "";
 
-			formatter = new SimpleDateFormat("hh:mm:ss z");
-			today = new Date();
-			if (hour_offset != 0)
-			{	// 3600000 milliseconds = 1 hour
-				long offset_time = today.getTime() + (hour_offset * 3600000);
-				today.setTime(offset_time);
+			if (add_timestamp) {
+				Date today;
+				SimpleDateFormat formatter;
+				formatter = new SimpleDateFormat("hh:mm:ss z");
+				today = new Date();
+				if (hour_offset != 0)
+				{	// 3600000 milliseconds = 1 hour
+					long offset_time = today.getTime() + (hour_offset * 3600000);
+					today.setTime(offset_time);
+				}
+				timestamp = " " + formatter.format(today);
 			}
-			output = formatter.format(today);
 			
-			if(msg.length() >= 140-(output.length()+1)) {
-				msg = msg.substring(0, 140-(output.length()+1));
+			if(msg.length() >= 140-(timestamp.length())) {
+				msg = msg.substring(0, 140-(timestamp.length()));
 			}
 			
-			msg += " " + output;
+			msg += timestamp;
 			
 			try {
 				Twitter twitter = tf.getInstance();

@@ -204,8 +204,9 @@ public class DataParser {
 					} else {
 						log.warning(ServerEvents.configFile + ": 'conf.twitter.timestamp_hour_offset' is not present in your config. No offset will be applied.");
 					}
+					boolean add_timestamp = Boolean.parseBoolean(attributes.getValue("add_timestamp"));
 
-					DataSource.addTwitterDataSource(attributes.getValue("accessToken"), attributes.getValue("accessTokenSecret"), rate, hourOffset);
+					DataSource.addTwitterDataSource(attributes.getValue("accessToken"), attributes.getValue("accessTokenSecret"), add_timestamp, rate, hourOffset);
 				}
 			} else if (qName.equalsIgnoreCase("database")) {
 				database = true;

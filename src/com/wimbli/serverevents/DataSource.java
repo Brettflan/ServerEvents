@@ -33,8 +33,8 @@ public abstract class DataSource {
 	
 	protected abstract void displayMessage(Messages.Type type, String msg);
 	
-	protected static void addTwitterDataSource(String username, String password, int rate_limit, int hour_offset) {
-		ds.add(new DataSourceTwitter(username, password, rate_limit, hour_offset));
+	protected static void addTwitterDataSource(String username, String password, boolean add_timestamp, int rate_limit, int hour_offset) {
+		ds.add(new DataSourceTwitter(username, password, add_timestamp, rate_limit, hour_offset));
 	}
 	
 	protected static void addDatabaseDataSource(String username, String password, String database, String table, String driver) {
