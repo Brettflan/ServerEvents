@@ -28,13 +28,17 @@ public class DeathThread implements Runnable {
     private Thread thread;
     
     private Player player;
-    private EntityDamageEvent event;
+	private EntityDamageEvent.DamageCause damageCause;
+	private Entity damager;
+	private int damageAmount;
     
     protected static final Logger log = Logger.getLogger("Minecraft");
     
     protected DeathThread(Player player, EntityDamageEvent event) {
-    	this.player = player;
-    	this.event = event;
+    	this.player = player.getPlayer();
+    	this.damageCause = event.getCause();
+		this.damager = ((EntityDamageByEntityEvent)event).getDamager();
+		this.damageAmount = event.getDamage();
     }
 
     public void run() {
@@ -58,17 +62,14 @@ public class DeathThread implements Runnable {
             
             ServerEventsEntityListener.lastDeath.put(player.getName(), System.currentTimeMillis());
 
-            Entity damager = null;
     		DeathType type = DeathType.UNKNOWN;
     		DeathType type2 = DeathType.UNKNOWN;
-			if (event.getCause() != null)
+			if (damageCause != null)
 			{
-				switch (event.getCause()) {
+				switch (damageCause) {
 					case PROJECTILE:
 					case ENTITY_EXPLOSION:
 					case ENTITY_ATTACK:
-						damager = ((EntityDamageByEntityEvent)event).getDamager();
-
 						// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
 						if (damager instanceof Projectile) {
 							damager = ((Projectile)damager).getShooter();
@@ -133,7 +134,7 @@ public class DeathThread implements Runnable {
     		Message msg = Messages.getRandomDeathMessage(type, type2);
         	
     		if (msg != null) {
-        		HashMap<String, String> replacements = Messages.getReplacementsForDeath(type, damager, event.getDamage());
+        		HashMap<String, String> replacements = Messages.getReplacementsForDeath(type, damager, damageAmount);
         		replacements.putAll(Messages.getReplacementsForPlayer(player));
         		DataSource.display(Type.DEATH, msg.getMessage(replacements));
         	}
