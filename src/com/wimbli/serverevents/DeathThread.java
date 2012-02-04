@@ -37,7 +37,7 @@ public class DeathThread implements Runnable {
     protected DeathThread(Player player, EntityDamageEvent event) {
     	this.player = player.getPlayer();
     	this.damageCause = event.getCause();
-		this.damager = ((EntityDamageByEntityEvent)event).getDamager();
+		this.damager = (event instanceof EntityDamageByEntityEvent) ? ((EntityDamageByEntityEvent)event).getDamager() : null;
 		this.damageAmount = event.getDamage();
     }
 
