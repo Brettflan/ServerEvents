@@ -3,23 +3,28 @@ package com.wimbli.serverevents;
 import java.util.HashMap;
 
 import com.wimbli.serverevents.Messages.Type;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerListener;
 
-public class ServerEventsPlayerListener extends PlayerListener {
 
-    @Override
+public class ServerEventsPlayerListener implements Listener {
+
+	@EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
+    	if (!Messages.hasMessages(Type.JOIN)) return;
     	Message msg = Messages.getRandomMessage(Messages.Type.JOIN);
     	if (msg != null) {
     		DataSource.display(Type.JOIN, msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
     	}
     }
 
-    @Override
+	@EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerQuit(PlayerQuitEvent event) {
+    	if (!Messages.hasMessages(Type.QUIT)) return;
     	Message msg = Messages.getRandomMessage(Messages.Type.QUIT);
     	if (msg != null) {
     		DataSource.display(Type.QUIT, msg.getMessage(Messages.getReplacementsForPlayer(event.getPlayer())));
@@ -30,8 +35,9 @@ public class ServerEventsPlayerListener extends PlayerListener {
     	ServerEventsEntityListener.lastDeath.remove(event.getPlayer().getName());
     }
     
-    @Override
+	@EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+    	if (!Messages.hasMessages(Type.COMMAND) || event.isCancelled()) return;
     	String command = event.getMessage();
     	
     	Message msg = Messages.getRandomCommandMessage(command);

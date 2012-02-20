@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 import org.bukkit.Server;
 import com.wimbli.serverevents.Messages.Type;
-import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -17,8 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 */
 public class ServerEvents extends JavaPlugin {
 	protected static final Logger log      = Logger.getLogger("Minecraft");
-	protected ServerEventsPlayerListener pl   = new ServerEventsPlayerListener();
-	protected ServerEventsEntityListener el   = new ServerEventsEntityListener();
     
     public String name;
     public String version;
@@ -40,8 +36,6 @@ public class ServerEvents extends JavaPlugin {
     	if (msg != null) {
     		DataSource.display(Type.STOP, msg.getMessage());
     	}
-    	
-		log.info(getDescription().getName() + " " + getDescription().getVersion() + " disabled");
     }
 
     @Override
@@ -76,8 +70,6 @@ public class ServerEvents extends JavaPlugin {
     	if (randomMessageThread == null)
     		randomMessageThread = new RandomMessageThread(this);
     	randomMessageThread.start();
-
-		log.info( name + " version " + version + " is enabled!" );
 		
 		Message msg = Messages.getRandomMessage(Messages.Type.START);
     	if (msg != null) {
@@ -86,26 +78,10 @@ public class ServerEvents extends JavaPlugin {
     }
     
     protected void attachHooks() {
-    	if (Messages.hasMessages(Messages.Type.JOIN))
-    		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, pl, Priority.Monitor, this);
-    	
-    	if (Messages.hasMessages(Messages.Type.COMMAND))
-    		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pl, Priority.Monitor, this);
-    		
-    	if (Messages.hasMessages(Messages.Type.QUIT))
-    		getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, pl, Priority.Monitor, this);
-    			
-    	if (Messages.hasMessages(Messages.Type.DEATH)) {
-    		getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DEATH, el, Priority.Monitor, this);
-    	}
-    	
-    	if (Messages.hasMessages(Messages.Type.BAN)){
-    	// TODO:	
-    	}
-    		
-    	if (Messages.hasMessages(Messages.Type.KICK)){
-    	// TODO:	
-    	}
+		getServer().getPluginManager().registerEvents(new ServerEventsPlayerListener(), this);
+
+		if (Messages.hasMessages(Messages.Type.DEATH))
+			getServer().getPluginManager().registerEvents(new ServerEventsEntityListener(), this);
     }
     
     protected boolean initProps() {
