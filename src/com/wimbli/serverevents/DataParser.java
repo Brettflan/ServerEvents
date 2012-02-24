@@ -151,8 +151,7 @@ public class DataParser {
 					
 					String tmpUri = attributes.getValue("uri");
 					String tmpKeep = attributes.getValue("keep_old");
-					
-					String finalUri = "ServerEvents" + File.separatorChar + "server_events.txt";
+
 					int finalKeep = 5;
 					
 					if (tmpUri == null || tmpUri.equals("")) {
@@ -173,7 +172,7 @@ public class DataParser {
 							log.warning(ServerEvents.configFile + ": 'conf.file.keep_old' must an integer greater than 0");
 						}
 					}
-					DataSource.addFileDataSource(finalUri, finalKeep);
+					DataSource.addFileDataSource(tmpUri, finalKeep);
 				}
 			} else if (qName.equalsIgnoreCase("twitter")) {
 				twitter = true;

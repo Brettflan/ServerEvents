@@ -40,7 +40,7 @@ public class DefaultConfig {
 			"		<queue enabled=\"true\" messages_per_minute=\"12\" messages_to_hold=\"10\" />\r\n" + 
 			"		<!--  If for some reason you still want to see the default Minecraft death messages in addition to the ServerEvents ones, set this to false. -->\r\n" +
 			"		<preventDefaultMinecraftDeathMessages enabled=\"true\" />\r\n" +
-			"		<file enabled=\"false\" uri=\"ServerEvents"+File.separatorChar+"plugins"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
+			"		<file enabled=\"false\" uri=\"plugins"+File.separatorChar+"ServerEvents"+File.separatorChar+"server_events.txt\" keep_old=\"5\" />\r\n" + 
 			"		<!--  See https://github.com/Bukkit/Bukkit/blob/master/src/main/java/org/bukkit/ChatColor.java for colors. -->\r\n" + 
 			"		<chat enabled=\"true\" prefix=\"[ServerEvents] \" prefix_color=\"aqua\" color=\"white\" />\r\n" + 
 			"		<!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" + 

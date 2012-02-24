@@ -31,7 +31,7 @@ public class DataSourceFile extends DataSource {
 				writer = new FileWriter(location);
 				writer.write("");
 			} catch (Exception e) {
-				log.log(Level.SEVERE, "Exception while creating " + location, e);
+				log.log(Level.SEVERE, "Exception while creating " + location + ":\n\t" + e.getMessage());
 				return false;
 			} finally {
 				try {
@@ -40,7 +40,7 @@ public class DataSourceFile extends DataSource {
 						return true;
 					}
 				} catch (IOException e) {
-					log.log(Level.SEVERE, "Exception while closing writer for "	+ location, e);
+					log.log(Level.SEVERE, "Exception while closing writer for "	+ location + ":\n\t" + e.getMessage());
 					return false;
 				}
 			}
