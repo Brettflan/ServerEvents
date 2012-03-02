@@ -53,14 +53,14 @@ public class DeathThread implements Runnable {
             	return;
             }
             
-            if (ServerEventsEntityListener.lastDeath.containsKey(player.getName())) {
-            	if (ServerEventsEntityListener.lastDeath.get(player.getName())+5000 >= System.currentTimeMillis()) {
+            if (ServerEventsListener.lastDeath.containsKey(player.getName())) {
+            	if (ServerEventsListener.lastDeath.get(player.getName())+5000 >= System.currentTimeMillis()) {
             		this.stop();
                 	return;
             	}
             }
             
-            ServerEventsEntityListener.lastDeath.put(player.getName(), System.currentTimeMillis());
+            ServerEventsListener.lastDeath.put(player.getName(), System.currentTimeMillis());
 
     		DeathType type = DeathType.UNKNOWN;
     		DeathType type2 = DeathType.UNKNOWN;
@@ -150,7 +150,7 @@ public class DeathThread implements Runnable {
     }
 
     protected void stop() {
-    	ServerEventsEntityListener.threads.remove(player.getName());
+    	ServerEventsListener.threads.remove(player.getName());
         this.running = false;
         thread.interrupt();
         thread = null;
