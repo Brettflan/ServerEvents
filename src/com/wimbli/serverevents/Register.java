@@ -33,7 +33,6 @@ import twitter4j.auth.RequestToken;
 public final class Register {
 	private static boolean cmdLine = true;
 	private static boolean isPlayer = true;
-//	private static ServerEventsCommand.RegisterCommand sender;
 	private static Twitter twitter;
 	private static AccessToken accessToken = null;
 	private static RequestToken requestToken;
@@ -44,10 +43,8 @@ public final class Register {
 		execute();
 	}
 
-//	public static void register(ServerEventsCommand.RegisterCommand commandSender) {
 	public static void register(boolean byPlayer)
 	{
-//		sender = commandSender;
 		cmdLine = false;
 		isPlayer = byPlayer;
 		updateDir();
@@ -151,7 +148,7 @@ public final class Register {
 		if (cmdLine)
 			msg("Access granted to Twitter. After updating server_event.xml with the info above, you can start the server up.");
 		else
-			msg("After editing server_events.xml, you can use \"/serverevents reload\" to reload it without needing to restart the server.");
+			msg("After editing server_events.xml, you can use \"" + (isPlayer ? "/" : "") + "serverevents reload\" to reload it without needing to restart the server.");
 
 		return true;
 	}

@@ -12,18 +12,19 @@ public class ServerEventsCommand implements CommandExecutor
 	private ServerEvents plugin;
 	private static ConversationFactory conversationFactory;
 	private static Conversation conversation;
+	private static final String escapeSequence = "/cancel";
 
 	public ServerEventsCommand(ServerEvents plugin)
 	{
 		this.plugin = plugin;
 		this.conversationFactory = new ConversationFactory(plugin)
 			.withFirstPrompt(new RegisterStartPrompt())
-			.withEscapeSequence("/cancel")
+			.withEscapeSequence(escapeSequence)
 			.withTimeout(300);
 	}
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] split)
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] split)
 	{
 		// reload command?
 		if (split.length == 1 && split[0].equals("reload"))
@@ -59,23 +60,26 @@ public class ServerEventsCommand implements CommandExecutor
 			else
 				sender.sendMessage("You are unable to receive conversations. Maybe your CraftBukkit is out of date?");
 
-//			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new RegisterCommand(sender));
-
 			return true;
 		}
 
 		// no recognized subcommand, then
-		sender.sendMessage("Commands: \"serverevents reload\", \"serverevents register\".");
+		String slash = (sender instanceof Player) ? "/" : "";
+		sender.sendMessage("Commands: "+slash+"serverevents reload, "+slash+"serverevents register");
 		return true;
 	}
 
+
+/*
+ *	Below code is all related to the register command from above, providing a Conversation between the sender and the registration handler
+ */
 
 	private class RegisterStartPrompt extends MessagePrompt
 	{
 		public String getPromptText(ConversationContext context)
 		{
 			Register.register(context.getForWhom() instanceof Player);
-			return "All information will also be output to your server log. You can cancel this process by entering \"/cancel\".";
+			return "All information will also be output to your server log. You can cancel this process by entering \""+escapeSequence+"\".";
 		}
 
 		@Override
@@ -131,25 +135,4 @@ public class ServerEventsCommand implements CommandExecutor
 		if (conversation != null)
 			conversation.abandon();
 	}
-/*
-	// this is needed so the Register class doesn't have any direct reference to a CommandSender, otherwise executing the ServerEvents jar directly will fail
-	public static class RegisterCommand implements Runnable
-	{
-		private CommandSender sender;
-
-		public RegisterCommand(CommandSender sender)
-		{
-			this.sender = sender;
-		}
-
-		public void run()
-		{
-			Register.register(this);
-		}
-
-		public void msg(String text)
-		{
-			sender.sendMessage(text);
-		}
-	}*/
 }
