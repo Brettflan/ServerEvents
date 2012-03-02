@@ -75,7 +75,20 @@ public class Messages {
 			case BLOCK: blockMessages.add(msg); break;
 		}
 	}
-	
+
+	public static void clearAllMessages() {
+		randomMessages.clear();
+		startMessages.clear();
+		stopMessages.clear();
+		joinMessages.clear();
+		quitMessages.clear();
+		kickMessages.clear();
+		banMessages.clear();
+		commandMessages.clear();
+		deathMessages.clear();
+		blockMessages.clear();
+	}
+
 	public static void removeMessage(Type type, String msg) {
 		ArrayList<Message> tmp = null;
 		

@@ -1,3 +1,16 @@
 name: ServerEvents
 main: com.wimbli.serverevents.ServerEvents
-version: 1.4.4
+version: 1.5.0_dev
+commands:
+  serverevents:
+    description: Primary command for ServerEvents.
+    usage:
+      - <command> reload - reload data from server_events.xml
+      - <command> register - begin registration with Twitter
+permissions:
+  serverevents.reload:
+    description: Ability to make the plugin reload data from server_events.xml, using /serverevents reload
+    default: op
+  serverevents.register:
+    description: Ability to register with a Twitter account, using /serverevents register
+    default: op

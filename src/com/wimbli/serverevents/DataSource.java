@@ -30,6 +30,13 @@ public abstract class DataSource {
 	protected DataSource() {
 		
 	}
+
+	protected static void empty() {
+		ds.clear();
+		queue.clear();
+		typeQueue.clear();
+		disabled.clear();
+	}
 	
 	protected abstract void displayMessage(Messages.Type type, String msg);
 	
