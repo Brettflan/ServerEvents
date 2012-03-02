@@ -44,7 +44,7 @@ public class DefaultConfig {
 			"		<!--  See https://github.com/Bukkit/Bukkit/blob/master/src/main/java/org/bukkit/ChatColor.java for colors. -->\r\n" + 
 			"		<chat enabled=\"true\" prefix=\"[ServerEvents] \" prefix_color=\"aqua\" color=\"white\" />\r\n" + 
 			"		<!--  To get accessToken and secret run `java -jar ServerEvents.jar` -->\r\n" + 
-			"		<twitter enabled=\"false\" accessToken=\"{accessToken}\" accessTokenSecret=\"{accessTokenSecret}\" rate_limit=\"350\" add_timestamp=\"false\" timestamp_hour_offset=\"0\" />\r\n" + 
+			"		<twitter enabled=\"false\" accessToken=\"{accessToken}\" accessTokenSecret=\"{accessTokenSecret}\" rate_limit=\"350\" add_timestamp=\"true\" timestamp_hour_offset=\"0\" />\r\n" + 
 			"		<database enabled=\"false\" username=\"\" password=\"\" database=\"jdbc:mysql://localhost:3306/minecraft\" table=\"server_events\" driver=\"com.mysql.jdbc.Driver\" />\r\n" + 
 			"	</conf>\r\n" + 
 			"	\r\n" + 

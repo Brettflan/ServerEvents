@@ -1,5 +1,4 @@
 package com.wimbli.serverevents;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -61,7 +60,8 @@ public class DataParser {
 		
 		String msgString = "";
 		Message curMessage;
-		
+
+		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 			if (qName.equalsIgnoreCase("msg")) {
 				msg = true;
@@ -247,13 +247,15 @@ public class DataParser {
 				stop = true;
 			}
 		}
-		
+
+		@Override
 		public void characters(char[] ch, int start, int length) {
 			if (msg && enabled) {
 				msgString += new String(ch, start, length);
 			}
 		}
 
+		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException {
 			if (qName.equalsIgnoreCase("msg") && enabled) {
 				msg = false;
