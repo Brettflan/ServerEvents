@@ -2,6 +2,7 @@ package com.wimbli.serverevents;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -142,10 +143,11 @@ public class Messages {
 	public static HashMap<String, String> getReplacementsForPlayer(Player player) {
 		HashMap<String, String> replacements = new HashMap<String, String>();
 		if (player != null) {
+			InetSocketAddress address = player.getAddress();
 			replacements.put("%n", player.getDisplayName());
 			replacements.put("%n_health", String.valueOf(player.getHealth()));
-			replacements.put("%n_ip", player.getAddress().getAddress().getHostAddress());
-			replacements.put("%n_hostname", player.getAddress().getAddress().getCanonicalHostName());
+			replacements.put("%n_ip", (address == null) ? "Unknown IP" : address.getAddress().getHostAddress());
+			replacements.put("%n_hostname", (address == null) ? "Unknown Hostname" : address.getAddress().getCanonicalHostName());
 			if (player.getItemInHand().getType() == Material.AIR) {
 				replacements.put("%n_item", "nothing");
 			} else {
