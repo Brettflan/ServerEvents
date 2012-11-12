@@ -11,7 +11,9 @@ public enum DeathType {
 	BURNING("burning"), LAVA("lava"), SUFFOCATION("suffocation"), GIANT("giant"), 
 	SLIME("slime"), UNKNOWN("unknown"), STARVATION("starvation"), ORPHAN("orphanprojectile"),
 	CAVESPIDER("cavespider"), ENDERMAN("enderman"), SILVERFISH("silverfish"),
-	BLAZE("blaze"), MAGMACUBE("magmacube"), ENDERDRAGON("enderdragon");
+	BLAZE("blaze"), MAGMACUBE("magmacube"), ENDERDRAGON("enderdragon"), CAT("cat"),
+	WOLF("wolf"), IRONGOLEM("irongolem"), WITCH("witch"), WITHER("wither"),
+	WITHERSKELETON("witherskeleton"), LIGHTNING("lightning");
 
     private String name;
     

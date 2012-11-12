@@ -1,9 +1,11 @@
 package com.wimbli.serverevents;
 
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.wimbli.serverevents.Messages.Type;
+
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Creeper;
@@ -11,7 +13,9 @@ import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Ghast;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -19,9 +23,15 @@ import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
+import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+
+import org.bukkit.craftbukkit.entity.CraftSkeleton;
+
 
 public class DeathThread implements Runnable {
     private boolean running = false;
@@ -39,6 +49,7 @@ public class DeathThread implements Runnable {
     	this.damageCause = (event == null) ? EntityDamageEvent.DamageCause.CUSTOM : event.getCause();
 		this.damager = (event instanceof EntityDamageByEntityEvent) ? ((EntityDamageByEntityEvent)event).getDamager() : null;
 		this.damageAmount = (event == null) ? 0 : event.getDamage();
+		log.log(Level.INFO, "Death Cause: " + damageCause.toString() + "  Damager: " + (damager == null ? "null" : damager.toString()));
     }
 
     public void run() {
@@ -67,6 +78,7 @@ public class DeathThread implements Runnable {
 			if (damageCause != null)
 			{
 				switch (damageCause) {
+					case MAGIC:
 					case PROJECTILE:
 					case ENTITY_EXPLOSION:
 					case ENTITY_ATTACK:
@@ -83,7 +95,11 @@ public class DeathThread implements Runnable {
 							type = DeathType.ZOMBIE;
 							type2 = DeathType.CREATURE;
 						} else if (damager instanceof Skeleton) {
-							type = DeathType.SKELETON;
+							// kludgy method to tell if wither skeleton instead of regular kind
+							if (((CraftSkeleton)damager).getHandle().getSkeletonType() == 1)
+								type = DeathType.WITHERSKELETON;
+							else
+								type = DeathType.SKELETON;
 							type2 = DeathType.CREATURE;
 						} else if (damager instanceof Spider) {
 							type = DeathType.SPIDER;
@@ -118,6 +134,21 @@ public class DeathThread implements Runnable {
 						} else if (damager instanceof EnderDragon) {
 							type = DeathType.ENDERDRAGON;
 							type2 = DeathType.CREATURE;
+						} else if (damager instanceof IronGolem) {
+							type = DeathType.IRONGOLEM;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Ocelot) {
+							type = DeathType.CAT;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Witch) {
+							type = DeathType.WITCH;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Wither) {
+							type = DeathType.WITHER;
+							type2 = DeathType.CREATURE;
+						} else if (damager instanceof Wolf) {
+							type = DeathType.WOLF;
+							type2 = DeathType.CREATURE;
 						}
 						break;
 					case BLOCK_EXPLOSION: type = DeathType.EXPLOSION; break;
@@ -129,6 +160,7 @@ public class DeathThread implements Runnable {
 					case LAVA: type = DeathType.LAVA; break;
 					case SUFFOCATION: type = DeathType.SUFFOCATION; break;
 					case STARVATION: type = DeathType.STARVATION; break;
+					case LIGHTNING: type = DeathType.LIGHTNING; break;
 				}
 			}
     		Message msg = Messages.getRandomDeathMessage(type, type2);
