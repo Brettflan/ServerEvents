@@ -1,6 +1,6 @@
 name: ServerEvents
 main: com.wimbli.serverevents.ServerEvents
-version: 1.5.1_dev
+version: 1.5.1
 commands:
   serverevents:
     description: Primary command for ServerEvents.
