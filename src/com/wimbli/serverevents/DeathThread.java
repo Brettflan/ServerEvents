@@ -30,8 +30,6 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import org.bukkit.craftbukkit.entity.CraftSkeleton;
-
 
 public class DeathThread implements Runnable {
     private boolean running = false;
@@ -95,8 +93,8 @@ public class DeathThread implements Runnable {
 							type = DeathType.ZOMBIE;
 							type2 = DeathType.CREATURE;
 						} else if (damager instanceof Skeleton) {
-							// kludgy method to tell if wither skeleton instead of regular kind
-							if (((CraftSkeleton)damager).getHandle().getSkeletonType() == 1)
+							// see if wither skeleton instead of regular kind
+							if (((Skeleton)damager).getSkeletonType() == Skeleton.SkeletonType.WITHER)
 								type = DeathType.WITHERSKELETON;
 							else
 								type = DeathType.SKELETON;
