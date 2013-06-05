@@ -15,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Messages {
 	
@@ -256,7 +257,11 @@ public class Messages {
 		String item = "unknown";
 		
 		switch(type) {
-			case PLAYER: killer = ((Player)entity).getDisplayName(); item = ((Player)entity).getItemInHand().getType().name().toLowerCase().replace("_", " "); break;
+			case PLAYER:
+					killer = ((Player)entity).getDisplayName();
+					ItemStack handItem = ((Player)entity).getItemInHand();
+				    item = handItem.getItemMeta().hasDisplayName() ? handItem.getItemMeta().getDisplayName() : handItem.getType().name().toLowerCase().replace("_", " ");
+					break;
 			case CREATURE: killer = "a strange creature"; break;
 			case ZOMBIE: killer = "a zombie"; break;
 			case GHAST: killer = "a ghast"; break;
