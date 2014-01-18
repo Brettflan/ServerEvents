@@ -38,7 +38,7 @@ public class DeathThread implements Runnable {
     private Player player;
 	private EntityDamageEvent.DamageCause damageCause;
 	private Entity damager;
-	private int damageAmount;
+	private double damageAmount;
     
     protected static final Logger log = Logger.getLogger("Minecraft");
     

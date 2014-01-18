@@ -3,6 +3,7 @@ package com.wimbli.serverevents;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.net.InetSocketAddress;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,6 +34,7 @@ public class Messages {
 	private static ArrayList<Message> blockMessages   = new ArrayList<Message>();
 	
 	public static int randomDelay = 1800000;
+	public static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
 	
 	public static enum Type {
 		RANDOM, JOIN, START, STOP, QUIT, KICK, BAN, COMMAND, DEATH, BLOCK, CUSTOM
@@ -250,7 +252,7 @@ public class Messages {
 		return null;
 	}
 	
-	public static HashMap<String, String> getReplacementsForDeath(DeathType type, Entity entity, int damage) {
+	public static HashMap<String, String> getReplacementsForDeath(DeathType type, Entity entity, double damage) {
 		HashMap<String, String> replacements = new HashMap<String, String>();
 
 		String killer = "unknown";
@@ -283,12 +285,15 @@ public class Messages {
 			item = killer;
 		}
 		
-		replacements.put("%damage", String.valueOf(damage));
+		replacements.put("%damage", decimalFormat.format(damage));
 		replacements.put("%killer", killer);
 		replacements.put("%killer_item", item);
 		return replacements;
 	}
-	
+	public static HashMap<String, String> getReplacementsForDeath(DeathType type, Entity entity, int damage) {
+		return getReplacementsForDeath(type, entity, (double)damage);
+	}
+
 	public static HashMap<String, String> getReplacementsForServer(Server server) {
 		HashMap<String, String> replacements = new HashMap<String, String>();
 		
