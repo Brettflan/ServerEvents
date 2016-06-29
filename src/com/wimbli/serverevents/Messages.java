@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.net.InetSocketAddress;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -12,6 +13,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.ImmutableList;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Entity;
@@ -310,12 +314,12 @@ public class Messages {
 		replacements.put("%hostname", "localhost");
 		
 		String onlinePlayers = "";
-		Player[] players = server.getOnlinePlayers();
-		for (int i=0; i<players.length; i++) {
-			onlinePlayers += players[i].getDisplayName();
-			if (i+1 < players.length) {
+		Collection<Player> players = ImmutableList.copyOf(Bukkit.getServer().getOnlinePlayers());
+		for (Iterator player = players.iterator(); player.hasNext();)
+		{
+			onlinePlayers += ((Player)player.next()).getDisplayName();
+			if (player.hasNext())
 				onlinePlayers += ", ";
-			}
 		}
 		
 		replacements.put("%players", onlinePlayers);

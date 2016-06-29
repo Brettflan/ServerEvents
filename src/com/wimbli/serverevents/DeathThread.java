@@ -47,7 +47,7 @@ public class DeathThread implements Runnable {
     	this.damageCause = (event == null) ? EntityDamageEvent.DamageCause.CUSTOM : event.getCause();
 		this.damager = (event instanceof EntityDamageByEntityEvent) ? ((EntityDamageByEntityEvent)event).getDamager() : null;
 		this.damageAmount = (event == null) ? 0 : event.getDamage();
-		log.log(Level.INFO, "Death Cause: " + damageCause.toString() + "  Damager: " + (damager == null ? "null" : damager.toString()));
+//		log.log(Level.INFO, "Death Cause: " + damageCause.toString() + "  Damager: " + (damager == null ? "null" : damager.toString()));
     }
 
     public void run() {
@@ -81,9 +81,8 @@ public class DeathThread implements Runnable {
 					case ENTITY_EXPLOSION:
 					case ENTITY_ATTACK:
 						// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
-						if (damager instanceof Projectile) {
-							damager = ((Projectile)damager).getShooter();
-						}
+						if (damager instanceof Projectile)
+							damager = (Entity)(((Projectile)damager).getShooter());
 
 						if (damager == null) {
 							type = DeathType.ORPHAN;

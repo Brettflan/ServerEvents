@@ -22,13 +22,13 @@ public class RandomMessageThread implements Runnable {
             } catch (InterruptedException localInterruptedException) {
             }
             
-            Player[] players = se.getServer().getOnlinePlayers();
+			Object[] players = se.getServer().getOnlinePlayers().toArray();
             if (players.length > 0) {
             	Message msg = Messages.getRandomMessage(Messages.Type.RANDOM);
             	if (msg != null) {
             		Random generator = new Random();
             		int idx = generator.nextInt(players.length);
-	            	String message = msg.getMessage(Messages.getReplacementsForPlayer(players[idx]));
+	            	String message = msg.getMessage(Messages.getReplacementsForPlayer((Player)players[idx]));
 	            	DataSource.display(Type.RANDOM, message);
             	}
             }
